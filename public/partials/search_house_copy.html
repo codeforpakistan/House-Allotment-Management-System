@@ -1,0 +1,14 @@
+<!-- <div ng-controller="ServerSideProcessingCtrl as Main_Module">
+    <button ng-click="Main_Module.reloadData()" type="button" class="btn btn-info">
+            <i class="fa fa-refresh"></i>&nbsp;Reload data
+        </button>
+        <button ng-click="Main_Module.dtInstance.changeData(Main_Module.newSource)" type="button" class="btn btn-info">
+            <i class="fa fa-exchange"></i>&nbsp;Change data
+        </button>
+
+    <table datatable="" dt-options="Main_Module.dtOptions" dt-columns="Main_Module.dtColumns"  dt-instance="Main_Module.dtInstance" class="row-border hover"></table>
+</div> -->
+
+<div ng-controller="DataTableWithAjaxRequest as withAjax">
+    <table datatable="datatables" dt-options="withAjax.dtOptions" dt-columns="withAjax.dtColumns" class="row-border hover"></table>
+</div>

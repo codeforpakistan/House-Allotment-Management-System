@@ -1,0 +1,73 @@
+    <div class="myngDroplet" ng-controller="UploadController">
+
+        <section class="container">
+
+            <section class="droplet" ng-class="{ uploading: interface.isUploading() }">
+
+                <section class="toolbar">
+
+                    <div class="add-files">
+                        <input type="button" class="button add-files" value="Add Files..." />
+                        <droplet-upload-multiple ng-model="interface"></droplet-upload-multiple>
+                    </div>
+
+                    <input type="hidden" class="button upload-files" value="Upload Files" id="upload_imgs"
+                           ng-click="interface.uploadFiles()"
+                           ng-hide="interface.isUploading()"
+                           ng-class="{ clickable: interface.isReady() }" name="photo" />
+
+                    <input type="button" class="button upload-files" value="Uploading..." ng-show="interface.isUploading()" />
+
+                    <ul class="statistics">
+                        <li><label>Valid:</label> {{interface.getFiles(interface.FILE_TYPES.VALID).length}}</li>
+                        <li><label>Invalid:</label> {{interface.getFiles(interface.FILE_TYPES.INVALID).length}}</li>
+                        <li><label>Uploaded:</label> {{interface.getFiles(interface.FILE_TYPES.UPLOADED).length}}</li>
+                        <li><label>Deleted:</label> {{interface.getFiles(interface.FILE_TYPES.DELETED).length}}</li>
+                        <li><label>Total:</label> {{interface.getFiles().length}}</li>
+                    </ul>
+
+                    <comment class="progress" ng-class="{ visible: interface.isUploading() }">
+                        Uploaded: {{interface.progress.percent}}%
+                    </comment>
+
+                </section>
+
+                <droplet ng-model="interface">
+
+                    <!--<div class="loading" ng-class="{ visible: interface.isUploading() }">-->
+                        <!--<svg viewBox="0 0 400 400">-->
+                            <!--<path class="loading-path" data-progressbar ng-model="interface.progress.percent"-->
+                                  <!--d="M 0,1 L 398,1 L 398,234 L 1,234 L 0,1"-->
+                                  <!--stroke="#D3B2D1" stroke-width="1" fill-opacity="0"-->
+                                  <!--style="stroke-dasharray: 392px, 392px;stroke-dashoffset: 392px;"></path>-->
+                        <!--</svg>-->
+                    <!--</div>-->
+
+                    <comment></comment>
+
+                    <section class="message success" ng-class="{ visible: success }" ng-click="success = false">
+                        Successfully uploaded {{uploadCount}} files.
+                    </section>
+
+                    <section class="message error" ng-class="{ visible: error }" ng-click="error = false">
+                        Failed to upload any of the files.
+                    </section>
+
+                    <ul class="files">
+
+                        <li ng-repeat="model in interface.getFiles(interface.FILE_TYPES.VALID)">
+                            <droplet-preview ng-model="model"></droplet-preview>
+                            <div class="delete" ng-click="model.deleteFile()">&times;</div>
+                            <div class="size">{{model.file.size / 1024 | number: 1}}KB</div>
+                        </li>
+
+                    </ul>
+
+                    
+
+                </droplet>
+
+            </section>
+
+        </section>
+    </div>

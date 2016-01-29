@@ -1,0 +1,320 @@
+<div class="row-fluid" ng-controller="Update_Employee_Controller">
+    <div class="span12">
+
+        <!-- WIDGET START -->
+        <div class="widget">
+
+            <!-- Widget Title Start -->
+            <div class="widget-title">
+            <h4><i class="icon-reorder"></i> Update Employee Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                </span>
+            </div>
+            <!-- Widget Title End -->
+
+            <!-- Widget Body Start -->
+            <div class="widget-body">
+                <form class="form-horizontal" name="UpdateEmployeeForm" novalidate="true" ng-submit="EmployeeFormUpdate.$valid">
+
+                    <!-- Flash Message -->
+                    <div flash-message="3000"></div>
+                    <!--<div flash-message="5000"></div>-->
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="Name">Name</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Name" name="Name" id="Name" class="input-xlarge" autofocus required ng-model="field.es_officer_name"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Fname">Father Name</label>
+                            <div class="controls">
+                                <input type="text" name="Fname" id="Fname" placeholder="Father Name" class="input-xlarge" required ng-model="field.es_officer_fname"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="DOB">Date of Birth</label>
+                            <div class="controls">
+                                
+                                <input type="text" name="DOB" id="DOB" class="input-xlarge tooltips" placeholder="DOB | Format: {{format}}" required ng-model="field.officer_dob" />
+                                <span class="help-inline"></span>
+
+                                <!-- <ng-datepicker ng-model="ctrl.date1" class="input-xlarge tooltips"></ng-datepicker> -->
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="CNIC">CNIC</label>
+                            <div class="controls">
+                                <input type="text" name="CNIC" id="CNIC" class="input-xlarge tooltips" data-trigger="hover" placeholder="CNIC" required required ng-model="field.es_officer_cnic"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="gender">Gender</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="gender.es_gender_id as gender.es_gender_name for gender in es_gender_details" class="select select-default mrs mbm input-xlarge" name="gender" id="gender" ng-model="field.es_gender_id">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="marital_status">Marital Status</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="marital_status.es_marital_status_id as marital_status.es_marital_status_name for marital_status in es_marital_status_details" class="select select-default mrs mbm input-xlarge" name="marital_status" id="marital_status" ng-model="field.es_marital_status_id">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="Permenant_address">Permenant Address</label>
+                            <div class="controls">
+                                <input type="text" name="Permenant_address" id="Permenant_address" class="input-xlarge"placeholder="Permenant Address" required ng-model="field.es_officer_Paddress"/>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Present_Address">Present Address</label>
+                            <div class="controls">
+                                <input type="text" name="Present_Address" id="Present_Address" class="input-xlarge" placeholder="Present Address" required ng-model="field.es_officer_Taddress"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="mobileNo">Mobile No<br/>(SMS confirmation)</label>
+                            <div class="controls">
+                                <input type="text" name="mobileNo" id="mobileNo" class="input-xlarge tooltips" placeholder="Mobile No" required ng-model="field.es_officer_cell" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="phoneNo">Phone No</label>
+                            <div class="controls">
+                                <input type="text" name="phoneNo" id="phoneNo" class="input-xlarge tooltips" placeholder="Appoitment Date" required ng-model="field.es_officer_phone" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="Email">Email Address</label>
+                            <div class="controls">
+                                <input type="email" name="Email" id="Email" class="input-xlarge" placeholder="Email Address" required  ng-model="field.es_officer_email" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Personal_NO">Personal No</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" id="Personal_NO" requir ng-model="field.es_officer_personal_no" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-auto">
+                            <label class="control-label" for="ETGS_Date">Entry to Government <br/> Service with BPS</label>
+                            <div class="controls-custom" ng-repeat="each in BPSwithETGS">
+                                <select ng-options="bps.es_bps_id as bps.es_bps_title for bps in es_bps_details" class="input-small-custom select-default mrs mbm " name="bps" id="bps" ng-model="each.es_ETGS_bps_id">
+                                </select>
+                                <input type="text" name="ETGS_Date" id="ETGS_Date" class="input-large-custom tooltips" placeholder="Format: {{format}}" required ng-model="each.es_ETGS_bps_date" />
+                                <button class="btn btn-danger customButton" ng-click="delete($index)"><i class="icon-remove icon-white"></i></button>
+                                <button class="btn btn-success customButton" ng-click="add()"><i class="icon-plus icon-white"></i> </button>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Appt_Date">Appointment Date</label>
+                            <div class="controls">
+                                <input type="text" name="Appt_Date" id="Appt_Date" class="input-xlarge tooltips" data-trigger="hover" data-original-title="Format must be: DD-MM-YYYY"
+                                       data-mask="99-99-9999" placeholder="Appoitment Date | Format: {{format}}" required  ng-model="field.officer_doappt" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_dop">Date of Posting at <br/> Peshawar</label>
+                            <div class="controls">
+                                <input type="text" name="officer_dop" id="officer_dop" class="input-xlarge tooltips" placeholder="Date of Posting at Peshawar | Format: {{format}}"
+                                       required ng-model="field.officer_dop" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_EDFA">Entitlement Date for the <br/> Class of Accomodation</label>
+                            <div class="controls">
+                                <input type="text" name="officer_EDFA" id="officer_EDFA" class="input-xlarge tooltips" placeholder="Entitlement Date for the Class of Accomodation | Format: {{format}}"
+                                       required ng-model="field.officer_EDFA" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="Appt_Date">Date Of Retirment</label>
+                            <div class="controls">
+                                <input type="text" name="Appt_Date" id="Appt_Date" class="input-xlarge tooltips" data-trigger="hover" data-original-title="Format must be: DD-MM-YYYY"
+                                       data-mask="99-99-9999" placeholder="Date Of Retirement | Format: {{format}}" required ng-model="field.officer_dor" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="bps">BPS</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="bps.es_bps_id as bps.es_bps_title for bps in es_bps_details" class="select select-default mrs mbm input-xlarge"
+                                        name="bps" id="bps" ng-model="field.es_bps_id">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="designation">Designation</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="designation.es_designation_id as designation.es_designation_title for designation in es_designation_details"
+                                        class="select select-default mrs mbm input-xlarge" name="designation" id="designation" ng-model="field.es_designation_id">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="department">Department</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="department.es_department_id as department.es_department_name for department in es_department_details"
+                                        class="select select-default mrs mbm input-xlarge" name="department" id="department" ng-model="field.es_department_id">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="division">Division</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="division.es_division_id as division.es_division_name for division in es_division_details"
+                                        class="select select-default mrs mbm input-xlarge" name="division" id="division" ng-model="field.es_division_id">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="domicile">Domicile</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="domicile.es_domicile_id as domicile.es_domicile_title for domicile in es_domicile_details"
+                                        class="select select-default mrs mbm input-xlarge" name="domicile" id="domicile" ng-model="field.es_domicile_id">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-radio">
+                            <label class="control-label">Employment Type</label>
+                            <div class="controls">
+                                <label class="radio line" ng-repeat="etype in es_employment_type">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.es_employment_type_id" name="employment_type" required ng-value="etype.es_employment_type_id" style="opacity: 1;">
+                                    </div>
+                                    {{etype.es_employment_type_name}}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="both-bg-radio">
+                            <label class="control-label">Service Type</label>
+                            <div class="controls">
+                                <label class="radio line" ng-repeat="stype in es_service_type">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-checked="field.es_employment_type_id != 3" ng-model="field.es_service_type_id"
+                                               ng-disabled="field.es_employment_type_id == 3" name="service_type" required ng-value="stype.es_service_type_id" style="opacity: 1;">
+                                    </div>
+                                    {{stype.es_service_type_name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-radio">
+                            <label class="control-label">Civil Servant</label>
+                            <div class="controls">
+                                <label class="radio line">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.es_civil_servant" name="civil_servant" required ng-value="1" style="opacity: 1;">
+                                    </div>
+                                    Yes
+                                </label>
+                                <label class="radio line">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.es_civil_servant" name="civil_servant" required ng-value="0" style="opacity: 1;">
+                                    </div>
+                                    No
+                                </label>
+                            </div>
+                            <!--<span ng-show="field.civil_servant == 0" class="help-inline">Non Civial Servants Cannot Apply for This Service.</span>-->
+                        </div>
+                    </div>
+
+
+                    <!-- File Upload Start -->
+                    <ng-include src="'partials/ngDroplet.html'"></ng-include>
+                    <!-- File Upload End   -->
+
+                    <!-- Only For Preview Start -->
+                    <div class="myngDroplet-Preview">
+                        <section class="container">
+                            <section class="droplet">
+                                <droplet>
+                                    <commentpreview></commentpreview>
+                                    <ul class="files">
+                                        <li ng-repeat="eachpictureName in field.pictureNames" ng-hide="hideRow[$index]">
+                                            <img class="droplet-preview" id="{{eachpictureName.es_picture_id}}" ng-src="/uploads/{{eachpictureName.es_picture_name}}">
+                                            <div class="delete" ng-click="DeletePictureInside(eachpictureName.es_picture_id, eachpictureName.es_picture_name, $index)">×</div>
+                                            <div class="size ng-binding">11.7KB</div>
+                                        </li>
+                                    </ul>
+                                </droplet>
+                            </section>
+                        </section>
+                    </div>
+                    <!-- Only For Preview End -->
+
+
+                    <div class="form-actions">
+                        <!-- <button class="btn btn-warning" ng-disabled="field.es_civil_servant == 0 || !field.es_employment_type_id == 3 && field.es_service_type_id" ng-click="UpdateData()" uploadfile> -->
+                        <button class="btn btn-warning" ng-disabled="field.es_civil_servant == 0" ng-click="UpdateData()" uploadfile>
+                            <i class="icon-refresh icon-white"></i> Update</button>
+                        <button class="btn" back><i class="icon-ban-circle icon-white"></i> Cancel</button>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- Widget Body End -->
+
+        </div>
+        <!-- WIDGET END -->
+
+    </div>
+</div>

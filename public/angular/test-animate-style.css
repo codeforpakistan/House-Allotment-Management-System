@@ -1,0 +1,159 @@
+/*
+/* The state of an item which is about to be enter to $scope
+/* .ng-enter
+
+/* The state of an item which is entered to the $scope
+/* .ng-enter-active
+
+/* The state of an item which is about to leave the $scope
+/* .ng-leave
+
+/* The state of an item which left the $scope
+/* .ng-leave-active
+*/
+
+
+/*.animate-repeat {
+    line-height:40px;
+    list-style:none;
+    /!*box-sizing:border-box;*!/
+    border-bottom: 1px solid white;
+    -webkit-transition: 1s linear all;
+    transition: 1s linear all;
+}*/
+
+
+/**
+ * Stagger Leave (hide) animation
+ */
+.animate-repeat.ng-leave-stagger {
+    /* this will have a 100ms delay between each successive leave animation */
+    -webkit-transition-delay: 0.01s;
+    transition-delay: 0.01s;
+
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+/**
+ * Stagger ENTER ANIMATION
+ */
+.animate-repeat.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive enter animation */
+    -webkit-transition-delay: 0.01s;
+    transition-delay: 0.01s;
+
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+
+.animate-repeat.ng-hide,
+.animate-repeat.ng-move {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+    -webkit-transition:all linear 0.3s;
+    transition:all linear 0.3s;
+}
+
+.animate-repeat.ng-hide.ng-hide-active,
+.animate-repeat.ng-leave,.ng-enter-active,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+    opacity:1;
+    overflow: hidden;
+    /*height: 30px;*/
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-hide,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+    opacity:0;
+    overflow: hidden;
+    /*height: 0px;*/
+}
+
+
+
+
+
+
+
+/*.animate-repeat {
+    /!*transition: 400ms;*!/
+}
+
+.animate-repeat.ng-enter {
+    transition: 0.75s;
+    opacity: 0;
+}
+
+.animate-repeat.ng-enter-stagger{
+    transition-delay: 0.01s;
+}
+
+.animate-repeat.ng-enter-active {
+    opacity: 1;
+}
+
+.animate-repeat.ng-leave {
+    transition: 0.75s;
+    opacity: 1;
+}
+
+.animate-repeat.ng-leave-stagger{
+    transition-delay: 0.01s;
+}
+
+.animate-repeat.ng-leave-active {
+    opacity: 0;
+}*/
+
+
+
+
+
+
+
+/*.animate-repeat
+{
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave
+{
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    /!*position: relative;*!/
+    /!*display: block;*!/
+}
+
+.animate-repeat.ng-enter.ng-enter-active,
+.animate-repeat.ng-leave
+{
+    opacity: 1;
+    /!*top: 0;*!/
+    height: 0px;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-enter
+{
+    opacity: 0;
+   /!* top: -10px;*!/
+    height: 30px;
+}*/

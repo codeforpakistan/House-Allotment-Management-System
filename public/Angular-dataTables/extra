@@ -1,0 +1,56 @@
+
+
+    /******r*********************************** DataTables Controller Start *****************************************************/
+    // angular.module('showcase.serverSideProcessing', ['datatables'])
+    // Main_Module.controller('DataTableWithAjaxRequest', DataTableWithAjaxRequest);
+
+    // function DataTableWithAjaxRequest(DTOptionsBuilder, DTColumnBuilder)
+    // {
+    //     vm = this;
+    //     vm.dtOptions = DTOptionsBuilder.newOptions()
+    //         .withOption('ajax', {
+    //          // Either you specify the AjaxDataProp here
+    //          dataSrc: 'data',
+    //          url: 'http://localhost:3000/api/SELECT/es_house',
+    //          type: 'GET'
+    //      })
+    //      // or here
+    //      .withDataProp('data')
+    //         .withOption('processing', true)
+    //         .withOption('serverSide', true)
+    //         .withPaginationType('full_numbers');
+    //     vm.dtColumns = [
+    //         DTColumnBuilder.newColumn('es_house_id').withTitle('ID'),
+    //         DTColumnBuilder.newColumn('es_house_no').withTitle('House No'),
+    //         DTColumnBuilder.newColumn('es_house_rooms').withTitle('No Of Rooms'),//.notVisible()
+    //         DTColumnBuilder.newColumn('es_colony_name').withTitle('Colony'),
+    //         DTColumnBuilder.newColumn('es_city_name').withTitle('City'),
+    //     ];
+    // }
+
+    // function DataTableWithAjaxRequest(DTOptionsBuilder, DTColumnBuilder)
+    // {
+    //     var vm = this;
+
+    //     vm.dtOptions = DTOptionsBuilder.fromSource('data.json').withPaginationType('full_numbers');
+    //     vm.dtColumns =
+    //     [
+    //         DTColumnBuilder.newColumn('id').withTitle('ID'),
+    //         DTColumnBuilder.newColumn('firstName').withTitle('First name'),
+    //         DTColumnBuilder.newColumn('lastName').withTitle('Last name')//.notVisible()
+    //     ];
+
+    //     // var getRecord = function ()
+    //     // {
+    //     //     $http.get('http://localhost:3000/api/SELECT/es_house').
+    //     //     then(function successCallback(response)
+    //     //     {
+    //     //         return response
+    //     //     },
+    //     //     function errorCallback(response)
+    //     //     {
+    //     //         return response;
+    //     //     });
+    //     // }
+    // }
+    /******r*********************************** DataTables Controller End   *****************************************************/

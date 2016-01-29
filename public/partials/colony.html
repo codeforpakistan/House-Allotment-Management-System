@@ -1,0 +1,132 @@
+<div class="row-fluid" ng-controller="colony_Controller"> <!-- ng -->
+    
+    <!-- Flash Message -->
+    <div flash-message="3000"></div>
+    <!--<div flash-message="5000"></div>-->
+
+    <div class="span12">
+
+        <div class="span6">
+
+            <!-- WIDGET START -->
+            <div class="widget TwoWidgetsInOneFix">
+
+                <!-- Widget Title Start -->
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i> Add Colony</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                    </span>
+                </div>
+                <!-- Widget Title End -->
+
+                <!-- Widget Body Start -->
+                <div class="widget-body">
+                    
+                    <!-- Insert Form Start -->
+                     <div ng-hide="YesEdit">
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <div class="small-bg-half">
+                                    <label class="control-label">Colony Name</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" autofocus required ng-model="field.colony_name" />
+                                        <span class="help-inline" id="help-inline" style="color:red;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="small-bg-half">
+                                    <label class="control-label">Colony Type</label>
+                                    <div class="controls">
+                                        <select data-toggle="status" class="select select-default mrs mbm input-xlarge" ng-model="field.colony_type_id" required>
+                                            <option value="">--Select Colony Type--</option>
+                                            <option ng-repeat="colony in es_colony_type" value="{{colony.es_colony_type_id}}">{{colony.es_colony_type_name}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-success" ng-click="InsertData()">
+                                <i class="icon-plus icon-white"></i> Save</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Insert Form End -->
+
+                    <!-- Update Form Start -->
+                     <div ng-show="YesEdit">
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <div class="small-bg-half">
+                                    <label class="control-label">Colony Name</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" autofocus required ng-model="update.es_colony_name" />
+                                        <span class="help-inline" id="help-inline" style="color:red;"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="small-bg-half">
+                                    <label class="control-label">Colony Type</label>
+                                    <div class="controls">
+                                        
+                                        <select data-toggle="select" ng-options="colony.es_colony_type_id as colony.es_colony_type_name for colony in es_colony_type" class="select select-default mrs mbm input-xlarge" ng-model="update.es_colony_type_id" >
+                                            <option>Select Colony Type</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-success" ng-click="UpdateData(update.es_colony_id)">
+                                <i class="icon-plus icon-white"></i> Update</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Update Form End -->
+
+                </div>
+                <!-- Widget Body End -->
+
+            </div>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <div class="span6">
+
+            <!-- WIDGET START -->
+            <div class="widget TwoWidgetsInOneFix">
+
+                <!-- Widget Title Start -->
+                <div class="widget-title"> <!-- ng -->
+                    <h4><i class="icon-reorder"></i> List Of Colony</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                    </span>
+                </div>
+                <!-- Widget Title End -->
+
+                <!-- Widget Body Start -->
+                <div class="widget-body">
+                    <table class="table table-striped table-bordered" align="center" datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="row-border hover">
+                    </table>
+                </div>
+
+            </div>
+            <!-- Widget Body End -->
+
+        </div>
+        <!-- WIDGET END -->
+
+    </div>
+
+</div>

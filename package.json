@@ -1,0 +1,17 @@
+{
+  "name": "RESTful-API",
+  "version": "0.0.1",
+  "author": "Farrukh Askari",
+  "email": "",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "MD5": "~1.2.1",
+    "body-parser": "^1.12.4",
+    "express": "~4.12.2",
+    "gulp": "^3.9.0",
+    "md5": "^2.0.0",
+    "mysql": "^2.5.5"
+  }
+}

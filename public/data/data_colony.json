@@ -1,0 +1,22 @@
+[
+  {
+    "colony_id":"1",
+    "colony_name":"Colony 1"
+  },
+  {
+    "colony_id":"2",
+    "colony_name":"Colony 2"
+  },
+  {
+    "colony_id":"3",
+    "colony_name":"Colony 3"
+  },
+  {
+    "colony_id":"4",
+    "colony_name":"Colony 4"
+  },
+  {
+    "colony_id":"5",
+    "colony_name":"Colony 5"
+  }
+]

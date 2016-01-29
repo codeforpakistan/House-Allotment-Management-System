@@ -1,0 +1,26 @@
+[
+  {  
+    "es_colony_type_id": "1",
+    "es_colony_type_name": "Type 19"
+  },
+  {  
+    "es_colony_type_id": "2",
+    "es_colony_type_name": "Type 3"
+  },
+  {  
+    "es_colony_type_id": "3", 
+    "es_colony_type_name": "Type 4"
+  },
+  {  
+    "es_colony_type_id": "4", 
+    "es_colony_type_name": "Type 5"
+  },
+  {  
+    "es_colony_type_id": "5",
+    "es_colony_type_name": "Type 6"
+  },
+  {  
+    "es_colony_type_id": "7",
+    "es_colony_type_name": "Type 8"
+  }
+]

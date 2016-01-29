@@ -1,0 +1,219 @@
+<div class="row-fluid" ng-controller="update_house_Controller"> <!-- ng -->
+    <div class="span12">
+
+        <!-- WIDGET START -->
+        <div class="widget">
+
+            <!-- Widget Title Start -->
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> Update House Details</h4>
+                    <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                </span>
+            </div>
+            <!-- Widget Title End -->
+
+            <!-- Widget Body Start -->
+            <div class="widget-body">
+                <form class="form-horizontal" name="UpdateHouseForm" novalidate="true" ng-submit="">
+
+                    <!-- Flash Message -->
+                    <div flash-message=""></div>
+                    <!--<div flash-message="5000"></div>-->
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="house_no">House / Flat No:</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Click to add house no" class="input-xlarge" required id="house_no" 
+                                ng-model="field.es_house_no" ng-value="es_house_update.house_no" /> <!-- ng-->
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="rooms">Rooms</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Add number of Rooms" class="input-xlarge" required id="rooms" 
+                                ng-model="field.es_house_rooms" ng-value="es_house_update.house_rooms"/> <!-- ng-->
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="block_no">Block No:</label>
+                            <div class="controls">
+                                <input type="text" placeholder="add Block No" class="input-xlarge" required id="block_no" ng-model="field.es_house_blockno" value="es_house_update.house_blockno"/> <!-- ng-->
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="street_no">Street</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Add Street" class="input-xlarge" required id="street_no" ng-model="field.es_house_streetno" value="es_house_update.house_streetno"/> <!-- ng-->
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="sector">Sector</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Add sector" required id="sector" ng-model="field.es_house_sector" value="es_house_update.house_sector"/> <!-- ng-->
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="mohallah">Mohallah</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Add mohallah" id="mohallah" ng-model="field.es_house_mohallah" value="es_house_update.house_mohallah"/> <!-- ng-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="colony">Colony</label>
+                            <div class="controls">
+                                <select data-toggle="select" ng-options="colony.es_colony_id as colony.es_colony_name for colony in es_colony_details" class="select select-default mrs mbm input-xlarge" name="colony" id="colony" ng-model="field.es_colony_id"> <!-- ng -->
+                                    <!--<option>&#45;&#45;Select Colony&#45;&#45;</option>
+                                    <option ng-repeat="colony in es_colony_details" value="{{colony.es_colony_id}}">{{colony.es_colony_name}}</option>-->
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="both-bg">
+                            <label class="control-label" for="city">City</label>
+                            <div class="controls">
+                                <select data-toggle="city" ng-options="city.es_city_id as city.es_city_name for city in es_city_details" class="select select-default mrs mbm input-xlarge" name="city" id="city" ng-model="field.es_city_id"> <!-- ng -->
+                                    <!--<option>&#45;&#45;Select City&#45;&#45;</option>
+                                    <option ng-repeat="city in es_city_details" value="{{city.es_city_id}}">{{city.es_city_name}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="status">Status</label>
+                            <div class="controls">
+                                <select data-toggle="city" ng-options="status.es_status_id as status.es_status_name for status in es_status" class="select select-default mrs mbm input-xlarge" name="status" id="status" ng-model="field.es_house_status"> <!-- ng -->
+                                    <!--<option>&#45;&#45;Select Status&#45;&#45;</option>
+                                    <option ng-repeat="status in es_status" value="{{status.es_status_id}}">{{status.es_status_name}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Start -->
+                    <!-- <div class="myngDroplet" ng-controller="UploadController">
+
+                        <section class="container">
+
+                            <section class="droplet" ng-class="{ uploading: interface.isUploading() }">
+
+                                <section class="toolbar">
+
+                                    <div class="add-files">
+                                        <input type="button" class="button add-files" value="Add Files..." />
+                                        <droplet-upload-multiple ng-model="interface"></droplet-upload-multiple>
+                                    </div>
+
+                                    <input type="hidden" class="button upload-files" value="Upload Files" id="upload_imgs"
+                                           ng-click="interface.uploadFiles()"
+                                           ng-hide="interface.isUploading()"
+                                           ng-class="{ clickable: interface.isReady() }" name="photo" />
+
+                                    <input type="button" class="button upload-files" value="Uploading..." ng-show="interface.isUploading()" />
+
+                                    <ul class="statistics">
+                                        <li><label>Valid:</label> {{interface.getFiles(interface.FILE_TYPES.VALID).length}}</li>
+                                        <li><label>Invalid:</label> {{interface.getFiles(interface.FILE_TYPES.INVALID).length}}</li>
+                                        <li><label>Uploaded:</label> {{interface.getFiles(interface.FILE_TYPES.UPLOADED).length}}</li>
+                                        <li><label>Deleted:</label> {{interface.getFiles(interface.FILE_TYPES.DELETED).length}}</li>
+                                        <li><label>Total:</label> {{interface.getFiles().length}}</li>
+                                    </ul>
+
+                                    <comment class="progress" ng-class="{ visible: interface.isUploading() }">
+                                        Uploaded: {{interface.progress.percent}}%
+                                    </comment>
+
+                                </section>
+
+                                <droplet ng-model="interface">
+
+                                    <div class="loading" ng-class="{ visible: interface.isUploading() }">
+                                        <svg viewBox="0 0 400 400">
+                                            <path class="loading-path" data-progressbar ng-model="interface.progress.percent"
+                                                  d="M 0,1 L 398,1 L 398,234 L 1,234 L 0,1"
+                                                  stroke="#D3B2D1" stroke-width="1" fill-opacity="0"
+                                                  style="stroke-dasharray: 392px, 392px;stroke-dashoffset: 392px;"></path>
+                                        </svg>
+                                    </div>
+
+                                    <comment></comment>
+
+                                    <section class="message success" ng-class="{ visible: success }" ng-click="success = false">
+                                        Successfully uploaded {{uploadCount}} files.
+                                    </section>
+
+                                    <section class="message error" ng-class="{ visible: error }" ng-click="error = false">
+                                        Failed to upload any of the files.
+                                    </section>
+
+                                    <ul class="files">
+
+                                        <li ng-repeat="model in interface.getFiles(interface.FILE_TYPES.VALID)">
+                                            <droplet-preview ng-model="model"></droplet-preview>
+                                            <div class="delete" ng-click="model.deleteFile()">&times;</div>
+                                            <div class="size">{{model.file.size / 1024 | number: 1}}KB</div>
+                                        </li>
+
+                                    </ul>
+
+                                </droplet>
+
+                            </section>
+
+                        </section>
+                    </div> -->
+                    <!-- File Upload End -->
+
+                    <!-- Only For Preview Start -->
+                    <div class="myngDroplet-Preview">
+                        <section class="container">
+                            <section class="droplet">
+                                <droplet>
+                                    <commentpreview></commentpreview>
+                                    <ul class="files">
+                                        <li ng-repeat="eachpictureName in field.pictureNames" ng-hide="hideRow[$index]">
+                                            <img class="droplet-preview" id="{{eachpictureName.es_picture_id}}" ng-src="/uploads/{{eachpictureName.es_picture_name}}">
+                                            <div class="delete" ng-click="DeletePictureInside(eachpictureName.es_picture_id, eachpictureName.es_picture_name, $index)">×</div>
+                                            <div class="size ng-binding">11.7KB</div>
+                                        </li>
+                                    </ul>
+                                </droplet>
+                            </section>
+                        </section>
+                    </div>
+                    <!-- Only For Preview End -->
+
+                    <div class="form-actions">
+                        <button class="btn btn-warning" ng-disabled="" ng-click="UpdateData()" uploadfile>
+                            <i class="icon-refresh icon-white"></i> Update</button>
+                        <button class="btn" back><i class="icon-ban-circle icon-white"></i> Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Widget Body End -->
+
+        </div>
+        <!-- WIDGET END -->
+
+    </div>
+</div>

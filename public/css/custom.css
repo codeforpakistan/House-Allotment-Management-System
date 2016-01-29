@@ -1,0 +1,16 @@
+body
+{
+    /*background: #fffeb8;*/
+    background:#4d4d4d url(../img/bg-grey.jpg) !important;
+}
+
+.navbar-inverse .navbar-inner
+{
+    /*background-color: #660000;
+    background-image: none;
+    background-repeat: no-repeat;
+    border: none;*/
+
+    background:#4e4e4e url("../img/top-bg.jpg") repeat-x !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e',endColorstr='#4e4e4e',GradientType=0);
+}

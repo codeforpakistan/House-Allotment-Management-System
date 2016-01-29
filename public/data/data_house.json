@@ -1,0 +1,62 @@
+[
+  {
+    "es_house_id": "1",
+    "es_house_no":"22",
+    "es_house_rooms":"3",
+    "es_house_blockno":"A2",
+    "es_house_status":"0",
+    "es_house_streetno":"10",
+    "es_house_sector":"H1",
+    "es_house_mohallah":"New",
+    "es_house_city":"Peshawar",
+    "es_colony_id":"1"
+  },
+  {
+    "es_house_id": "2",
+    "es_house_no":"23",
+    "es_house_rooms":"3",
+    "es_house_blockno":"A2",
+    "es_house_status":"0",
+    "es_house_streetno":"10",
+    "es_house_sector":"H1",
+    "es_house_mohallah":"New",
+    "es_house_city":"Peshawar",
+    "es_colony_id":"1"
+  },
+  {
+    "es_house_id": "3",
+    "es_house_no":"24",
+    "es_house_rooms":"3",
+    "es_house_blockno":"A2",
+    "es_house_status":"0",
+    "es_house_streetno":"10",
+    "es_house_sector":"H1",
+    "es_house_mohallah":"New",
+    "es_house_city":"Bannu",
+    "es_colony_id":"1"
+  },
+  {
+    "es_house_id": "4",
+    "es_house_no":"25",
+    "es_house_rooms":"3",
+    "es_house_blockno":"A2",
+    "es_house_status":"0",
+    "es_house_streetno":"10",
+    "es_house_sector":"H1",
+    "es_house_mohallah":"New",
+    "es_house_city":"Nowshera",
+    "es_colony_id":"1"
+  },
+  {
+    "es_house_id": "5",
+    "es_house_no":"26",
+    "es_house_rooms":"4",
+    "es_house_blockno":"A2",
+    "es_house_status":"0",
+    "es_house_streetno":"11",
+    "es_house_sector":"H2",
+    "es_house_mohallah":"New",
+    "es_house_city":"Swat",
+    "es_colony_id":"1"
+  }
+]

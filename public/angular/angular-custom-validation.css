@@ -1,0 +1,11 @@
+.ng-touched.ng-invalid
+{
+    border-width: 1px;
+    border-color: #e34f4f; /* Red */
+}
+
+.ng-valid.ng-dirty
+{
+    border-color: #66cc33; /* Green */
+    /*border-color: #dff0d8;*/
+}

@@ -1,0 +1,87 @@
+
+<div class="login-header">
+  <!-- BEGIN LOGO -->
+  <div id="logo" class="center">
+      <img src="img/logo.png" alt="logo" class="center" />
+  </div>
+  <!-- END LOGO -->
+</div>
+
+<!-- BEGIN LOGIN -->
+<div id="login">
+<!-- BEGIN LOGIN FORM -->
+<form name="form" ng-submit="vm.login()" role="form">
+  <div class="lock">
+      <i class="icon-lock"></i>
+  </div>
+  <div class="control-wrap">
+      <h4>User Login</h4>
+      <div class="control-group">
+          <div class="controls">
+              <div class="input-prepend">
+                  <span class="add-on"><i class="icon-user"></i></span>
+                  <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" placeholder="Username" required />
+                  <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+              </div>
+          </div>
+      </div>
+      <div class="control-group">
+          <div class="controls">
+              <div class="input-prepend">
+                  <span class="add-on"><i class="icon-key"></i></span>
+                  <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" placeholder="Password" required />
+                  <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+              </div>
+              <div class="mtop10">
+                  <div class="block-hint pull-left small">
+                      <input type="checkbox" id=""> Remember Me
+                  </div>
+
+                  <!-- <div class="pull-right">
+                    <a href="#/register" class="">Register</a>
+                  </div> -->
+
+                  <div class="block-hint pull-right">
+                      <a href="#/register" class="" id="forget-password">Register</a>
+                  </div>
+
+                  <!-- <div class="block-hint pull-right">
+                      <a href="javascript:;" class="" id="forget-password">Forgot Password?</a>
+                  </div>
+
+                   -->
+              </div>
+
+              <div class="clearfix space5"></div>
+          </div>
+
+      </div>
+  </div>
+
+  <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" />
+
+  <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+</form>
+<!-- END LOGIN FORM -->        
+<!-- BEGIN FORGOT PASSWORD FORM -->
+<form id="forgotform" class="form-vertical no-padding no-margin hide" action="index.html">
+  <p class="center">Enter your e-mail address below to reset your password.</p>
+  <div class="control-group">
+    <div class="controls">
+      <div class="input-prepend">
+        <span class="add-on"><i class="icon-envelope"></i></span><input id="input-email" type="text" placeholder="Email"  />
+      </div>
+    </div>
+    <div class="space20"></div>
+  </div>
+  <input type="button" id="forget-btn" class="btn btn-block login-btn" value="Submit" />
+</form>
+<!-- END FORGOT PASSWORD FORM -->
+</div>
+<!-- END LOGIN -->
+<!-- BEGIN COPYRIGHT -->
+<div id="login-copyright">
+  2015 © www.RedStuioWeb.com - www.CodeForPakistan.com
+</div>
+<!-- END COPYRIGHT -->

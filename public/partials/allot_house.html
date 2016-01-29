@@ -1,0 +1,172 @@
+<div class="row-fluid"> <!-- ng -->
+    <div class="span12">
+
+        <!-- WIDGET START -->
+        <div class="widget">
+
+            <!-- Widget Title Start -->
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> Allot House To: </h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                </span>
+            </div>
+            <!-- Widget Title End -->
+
+            <!-- Widget Body Start -->
+            <div class="widget-body">
+
+                <form ng-controller="add_house_Controller" class="form-horizontal" id="test" name="AllotForm" novalidate="true" ng-submit="AllotForm.$valid">
+
+                    <!-- Flash Message -->
+                    <div flash-message="3000"></div>
+                    <!--<div flash-message="5000"></div>-->
+
+
+                    <dl class="dl-horizontal well assignedto">
+                        <h5><b>This house is about to be assigned to employee with following particulars. </b></h5>
+                        
+                        <div class="row-fluid">
+                            
+                            <div class="span6">
+                                <dt>Officer ID:</dt>
+                                <dd>{{field.es_officer_id}}</dd>
+                                
+                                <dt>Name:</dt>
+                                <dd>{{field.es_officer_name}}</dd>
+                                
+                                <dt>Father Name:</dt>
+                                <dd>{{field.es_officer_fname}}</dd>
+                                
+                                <dt>Date Of Birth:</dt>
+                                <dd>{{field.es_officer_dob}}</dd>
+                                
+                                <dt>Permanent Address:</dt>
+                                <dd>{{field.es_officer_Paddress}}</dd>
+
+                                <dt>C.N.I.C:</dt>
+                                <dd>{{field.es_officer_cnic}}</dd>
+
+                                <dt>Cell:</dt>
+                                <dd>{{field.es_officer_cell}}</dd>
+                            </div>
+                            
+                            <div class="span6">
+                                <dt>Phone:</dt>
+                                <dd>{{field.es_officer_phone}}</dd>
+
+                                <dt>Email:</dt>
+                                <dd>{{field.es_officer_email}}</dd>
+
+                                <dt>Basic Pay Scale:</dt>
+                                <dd>{{field.es_bps_title}}</dd>
+                                
+                                <dt>Date Of Appointment:</dt>
+                                <dd>{{field.es_officer_doappt}}</dd>
+
+                                <dt>Date Of Retirment:</dt>
+                                <dd>{{field.es_officer_dor}}</dd>
+
+                                <dt>Department:</dt>
+                                <dd>{{field.es_department_name}}</dd>
+
+                                <dt>Designation:</dt>
+                                <dd>{{field.es_designation_title}}</dd>
+                            </div>
+
+                        </div>
+                        
+                    </dl>
+
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="colony">Colony</label>
+                            <div class="controls">
+                                
+                                <select data-toggle="select" required class="select select-default mrs mbm input-xlarge" ng-model="colony" ng-options="colony.es_colony_id as colony.es_colony_name for colony in es_colony_details" ng-change="fetchHouses(colony)">
+                                    <option value="">Select Colony</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="house_no">House / Flat No:</label>
+                            <div class="controls">
+                                <select data-toggle="select" required class="select select-default mrs mbm input-xlarge" ng-model="house" ng-options="house.es_house_id as house.es_house_no for house in es_house_details" ng-change="HouseDetails(house)">
+                                    <option value="">Select House</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="city">City</label>
+                            <div class="controls">
+                                <input type="text" placeholder="City" class="input-xlarge" id="city" name="city" ng-model="SingleHouse.es_city_name" disabled />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="rooms">Rooms</label>
+                            <div class="controls">
+                                <input type="text" placeholder="No Of Rooms" class="input-xlarge" id="rooms" name="rooms" type="number" ng-model="SingleHouse.es_house_rooms" disabled />
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="block_no">Block No:</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Block No" class="input-xlarge" name="house_blockno" id="house_blockno" ng-model="SingleHouse.es_house_blockno" disabled />
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="street_no">Street</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Street" class="input-xlarge" name="house_streetno" id="house_streetno" ng-model="SingleHouse.es_house_streetno" disabled />
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="sector">Sector</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Sector" name="house_sector" id="house_sector" ng-model="SingleHouse.es_house_sector" disabled />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="mohallah">Mohallah</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Mohallah" name="house_mohallah" id="house_mohallah" ng-model="SingleHouse.es_house_mohallah" disabled />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-success" ng-show="NoRecordYet" ng-disabled="!AllotForm.$valid" ng-click="HouseAlloted()" uploadfile>
+                            <i class="icon-plus icon-white"></i> Allot</button>
+                        <button class="btn" back>
+                            <i class="icon-ban-circle icon-white"></i> Cancel</button>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- Widget Body End -->
+
+        </div>
+        <!-- WIDGET END -->
+
+    </div>
+</div>

@@ -1,0 +1,307 @@
+<div class="row-fluid">
+    <div class="span12">
+
+        <!-- WIDGET START -->
+        <div class="widget">
+
+            <!-- Widget Title Start -->
+            <div class="widget-title">
+            <h4><i class="icon-reorder"></i> Add Employee Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <!-- <a href="javascript:;" class="icon-remove"></a> -->
+                </span>
+            </div>
+            <!-- Widget Title End -->
+
+            <!-- Widget Body Start -->
+            <div class="widget-body">
+                <form class="form-horizontal" ng-controller="Add_Employee_Controller" name="EmployeeForm" novalidate="true" ng-submit="EmployeeForm.$valid">
+
+                    <!-- Flash Message -->
+                    <div flash-message="3000"></div>
+                    <!--<div flash-message="5000"></div>-->
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_name">Name</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Name" name="officer_name" id="officer_name" class="input-xlarge" autofocus required ng-model="field.officer_name"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_fname">Father Name</label>
+                            <div class="controls">
+                                <input type="text" placeholder="Father Name" name="officer_fname" id="officer_fname" class="input-xlarge" required  ng-model="field.officer_fname"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_DOB">Date of Birth</label>
+                            <div class="controls">
+                                <input type="text" name="officer_DOB" id="officer_DOB" class="input-xlarge tooltips" placeholder="DOB | Format: {{format}}" required ng-model="field.es_officer_dob"/>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="CNIC">CNIC</label>
+                            <div class="controls">
+                                <input type="number" name="officer_CNIC" id="CNIC" class="input-xlarge tooltips" data-trigger="hover" placeholder="CNIC" required ng-model="field.officer_cnic"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_gender">Gender</label>
+                            <div class="controls">
+                                <select data-toggle="gender" name="officer_gender" id="officer_gender" class="select select-default mrs mbm input-xlarge" ng-model="field.gender_id" required>
+                                <option value="">Select Gender</option>
+                                <option ng-repeat="gender in es_gender_details" value="{{gender.es_gender_id}}">{{gender.es_gender_name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_martial_status">Marital Status</label>
+                            <div class="controls">
+                                <select data-toggle="gender" name="officer_martial_status" id="officer_martial_status" class="select select-default mrs mbm input-xlarge" ng-model="field.marital_status_id" required>
+                                    <option value="">Select Marital Status</option>
+                                    <option ng-repeat="marital_status in es_marital_status_details" value="{{marital_status.es_marital_status_id}}">{{marital_status.es_marital_status_name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_Paddress">Permenant Address</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Permenant Address" name="officer_Paddress" id="officer_Paddress" required ng-model="field.officer_Paddress"/>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_Taddress">Present Address</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" placeholder="Present Address" name="officer_Taddress" id="officer_Taddress" required ng-model="field.officer_Taddress"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="mobileNo">Mobile No<br/>(SMS confirmation)</label>
+                            <div class="controls">
+                                <input type="text" name="officer_mobileNo" id="mobileNo" class="input-xlarge tooltips" data-trigger="hover" data-original-title="Format must be: 92-345-5050550" data-mask="99-999-9999999" placeholder="Mobile No" required ng-model="field.officer_cell" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="phoneNo">Phone No</label>
+                            <div class="controls">
+                                <input type="text" name="officer_phoneNo" id="phoneNo" class="input-xlarge tooltips" data-trigger="hover" data-original-title="Format must be: 091-5600000" data-mask="999-9999999" placeholder="Phone No" required ng-model="field.officer_phone" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="Email">Email Address</label>
+                            <div class="controls">
+                                <input type="text" name="officer_Email" id="Email" class="input-xlarge" placeholder="Email Address" required ng-model="field.officer_email" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Personal_NO">Personal No</label>
+                            <div class="controls">
+                                <input type="text" name="officer_Pno" class="input-xlarge" id="Personal_NO" required ng-model="field.officer_personal_no" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-auto">
+                            <label class="control-label" for="ETGS_Date">Entry to Government <br/> Service with BPS</label>
+
+                            <div class="controls-custom" ng-repeat="each in BPSwithETGS">
+                                <select class="input-small-custom select-default mrs mbm" ng-model="each.ETGS_bps_id" required>
+                                    <option value="">Select BPS</option>
+                                    <option ng-repeat="bps in es_bps_details" value="{{bps.es_bps_id}}">{{bps.es_bps_title}}</option>
+                                </select>
+                                <input type="text" name="ETGS_Date" id="ETGS_Date" class="input-large-custom tooltips" placeholder="Format: {{format}}" required ng-model="each.ETGS_bps_date" />
+                                <button class="btn btn-danger customButton" ng-click="delete($index)"><i class="icon-remove icon-white"></i> </button>
+                                <button class="btn btn-success customButton" ng-click="add()"><i class="icon-plus icon-white"></i> </button>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="Appt_Date">Appointment Date</label>
+                            <div class="controls">
+                                <input type="text" name="officer_Appt_Date" id="Appt_Date" class="input-xlarge tooltips" placeholder="Appoitment Date | Format: {{format}}" required ng-model="field.es_officer_doappt" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_dop">Date of Posting at <br/> Peshawar</label>
+                            <div class="controls">
+                                <input type="text" name="officer_dop" id="officer_dop" class="input-xlarge tooltips" placeholder="Date of Posting at Peshawar | Format: {{format}}" required ng-model="field.es_officer_dop" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_EDFA">Entitlement Date for the <br/> Class of Accomodation</label>
+                            <div class="controls">
+                                <input type="text" name="officer_EDFA" id="officer_EDFA" class="input-xlarge tooltips" placeholder="Entitlement Date for the Class of Accomodation | Format: {{format}}" required ng-model="field.es_officer_EDFA" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_DOR">Date Of Retirment</label>
+                            <div class="controls">
+                                <input type="text" name="Appt_Date" id="Appt_Date" id="officer_DOR" class="input-xlarge tooltips" data-trigger="hover" data-original-title="Format must be: DD-MM-YYYY"
+                                       data-mask="99-99-9999" placeholder="Date Of Retirment | Format: {{format}}" required ng-model="field.es_officer_dor" />
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_bps">Current BPS</label>
+                            <div class="controls">
+                                <select data-toggle="bps" name="officer_bps" id="officer_bps" class="select select-default mrs mbm input-xlarge" ng-model="field.bps_id" required>
+                                    <option value="">Select BPS</option>
+                                    <option ng-repeat="bps in es_bps_details" value="{{bps.es_bps_id}}">{{bps.es_bps_title}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_designation">Designation</label>
+                            <div class="controls">
+                                <select data-toggle="Designation" name="officer_designation" id="officer_designation" class="select select-default mrs mbm input-xlarge" ng-model="field.designation_id" required>
+                                    <option value="">Select Designation</option>
+                                    <option ng-repeat="designation in es_designation_details" value="{{designation.es_designation_id}}">{{designation.es_designation_title}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_dept">Department</label>
+                            <div class="controls">
+                                <select data-toggle="Department" name="officer_dept" id="officer_dept" class="select select-default mrs mbm input-xlarge" ng-model="field.department_id" required>
+                                    <option value="">Select Department</option>
+                                    <option ng-repeat="department in es_department_details" value="{{department.es_department_id}}">{{department.es_department_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_division">Division</label>
+                            <div class="controls">
+                                <select data-toggle="Division" name="officer_division" id="officer_division" class="select select-default mrs mbm input-xlarge" ng-model="field.division_id" required>
+                                    <option value="">Select Division</option>
+                                    <option ng-repeat="division in es_division_details" value="{{division.es_division_id}}">{{division.es_division_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="both-bg">
+                            <label class="control-label" for="officer_domicile">Domicile</label>
+                            <div class="controls">
+                                <select name="officer_domicile" id="officer_domicile" class="select select-default mrs mbm input-xlarge" ng-model="field.domicile_id" required>
+                                    <option value="">Select Domicile</option>
+                                    <option ng-repeat="domicile in es_domicile_details" value="{{domicile.es_domicile_id}}">{{domicile.es_domicile_title}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-radio">
+                            <label class="control-label">Employment Type</label>
+                            <div class="controls">
+                                <label class="radio line" ng-repeat="etype in es_employment_type">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.employment_type_id" name="employment_type" required ng-value="etype.es_employment_type_id" style="opacity: 1;">
+                                    </div>
+                                    {{etype.es_employment_type_name}}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="both-bg-radio">
+                            <label class="control-label">Service Type</label>
+                            <div class="controls">
+                                <label class="radio line" ng-repeat="stype in es_service_type">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.service_type_id"
+                                               ng-disabled="field.employment_type_id == 3" name="service_type" ng-value="stype.es_service_type_id" style="opacity: 1;">
+                                    </div>
+                                    {{stype.es_service_type_name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="both-bg-radio">
+                            <label class="control-label">Civil Servant</label>
+                            <div class="controls">
+                                <label class="radio line">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.civil_servant" name="civil_servant" required ng-value="1" style="opacity: 1;">
+                                    </div>
+                                    Yes
+                                </label>
+                                <label class="radio line">
+                                    <div class="radio">
+                                        <input class="inputRadio" type="radio" ng-model="field.civil_servant" name="civil_servant" required ng-value="0" style="opacity: 1;">
+                                    </div>
+                                    No
+                                </label>
+                            </div>
+                            <!--<span ng-show="field.civil_servant == 0" class="help-inline">Non Civial Servants Cannot Apply for This Service.</span>-->
+                        </div>
+
+                    </div>
+
+
+                    <!-- File Upload Start -->
+                    <ng-include src="'partials/ngDroplet.html'"></ng-include>
+                    <!-- File Upload End   -->
+                    
+                    <div class="form-actions">
+                        <!--<button type="button" class="btn btn-success" ng-disabled="!EmployeeForm.$valid || field.civil_servant == 0 || !field.employment_type_id == 3 && field.service_type_id" ng-click="InsertData()" uploadfile>-->
+                        <button type="button" class="btn btn-success" ng-disabled="!EmployeeForm.$valid || field.civil_servant == 0" ng-click="InsertData()" uploadfile>
+                            <i class="icon-plus icon-white"></i> Save</button>
+                        <button class="btn" type="reset" value="reset" ng-click="$reset()" reset>
+                            <i class="icon-refresh icon-white"></i> Reset</button>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- Widget Body End -->
+
+        </div>
+        <!-- WIDGET END -->
+
+    </div>
+</div>
