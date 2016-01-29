@@ -2392,6 +2392,7 @@
             }
             else if($scope.BPSwithETGS.length > $scope.ToCheckBPSwithETGS.length)
             {
+                console.log($scope);
                 
                 // for(var item1 in $scope.BPSwithETGS)
                 // {
