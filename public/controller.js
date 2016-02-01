@@ -1897,11 +1897,11 @@
         $scope.field = {};
         $scope.format = FormatDate.IncomingDateFilter(new Date());
 
-        $scope.BPSwithETGS = [{ETGS_bps_id:'', ETGS_bps_date:''}];
+        $scope.BPSwithETGS = [{bps_id:'', ETGS_bps_date:''}];
 
         $scope.add = function()
         {
-            $scope.BPSwithETGS.push({ETGS_bps_id:'', ETGS_bps_date:''});
+            $scope.BPSwithETGS.push({bps_id:'', ETGS_bps_date:''});
         }
 
         $scope.delete = function(index)
@@ -1957,7 +1957,7 @@
         $http.get('http://localhost:3000/api/SELECT/es_service_type').success(function(data)
         {
             $scope.es_service_type = data.es_service_type;
-            $scope.field.service_type_id = "1";
+            // $scope.field.service_type_id = "1";
         });
         /********************************** FETCH DATA END *********************************/
 
@@ -1993,7 +1993,7 @@
                     for(var item in $scope.BPSwithETGS)
                     {
 
-                        BPSwithETGS.push({"ETGS_bps_date": FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item].ETGS_bps_date), "ETGS_bps_id": $scope.BPSwithETGS[item].ETGS_bps_id, "officer_id": id});
+                        BPSwithETGS.push({"ETGS_bps_date": FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item].ETGS_bps_date), "bps_id": $scope.BPSwithETGS[item].bps_id, "officer_id": id});
                     }
 
                     setTimeout(function()
