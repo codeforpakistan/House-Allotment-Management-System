@@ -135,7 +135,7 @@
                             <label class="control-label" for="ETGS_Date">Entry to Government <br/> Service with BPS</label>
 
                             <div class="controls-custom" ng-repeat="each in BPSwithETGS">
-                                <select class="input-small-custom select-default mrs mbm" ng-model="each.ETGS_bps_id" required>
+                                <select class="input-small-custom select-default mrs mbm" ng-model="each.bps_id" required>
                                     <option value="">Select BPS</option>
                                     <option ng-repeat="bps in es_bps_details" value="{{bps.es_bps_id}}">{{bps.es_bps_title}}</option>
                                 </select>
