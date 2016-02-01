@@ -2279,7 +2279,7 @@
         $scope.BPSwithETGS = [];
         $scope.add = function()
         {
-            $scope.BPSwithETGS.push({"es_ETGS_id": "", "es_ETGS_bps_date": "", "es_ETGS_bps_id": "", "es_officer_id": officer_id});
+            $scope.BPSwithETGS.push({"es_ETGS_id": "", "es_ETGS_bps_date": "", "es_bps_id": "", "es_officer_id": officer_id});
         }
         $scope.delete = function(index)
         {
@@ -2290,8 +2290,8 @@
         }
 
         /********************************** UPDATE DATA START *******************************/
-        $scope.GetTData = function()
-        {
+        // $scope.GetTData = function()
+        // {
             $http.get('http://localhost:3000/api/SELECT/es_gender').success(function(data)
             {
                 $scope.es_gender_details = data.es_gender;
@@ -2374,7 +2374,7 @@
             {
                 $scope.field.pictureNames = data.es_picture;
             });
-        };
+        // };
 
 
         $scope.UpdateData = function()
@@ -2394,25 +2394,26 @@
             {
                 console.log($scope);
                 
-                // for(var item1 in $scope.BPSwithETGS)
-                // {
-                //     // Added In Case - Means New Insert without es_
-                //     if($scope.BPSwithETGS[item1].es_ETGS_id == "")
-                //     {
-                //         $scope.BPSwithETGS[item1].ETGS_bps_id = $scope.BPSwithETGS[item1].es_ETGS_bps_id;
-                //         $scope.BPSwithETGS[item1].ETGS_bps_date = FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item1].es_ETGS_bps_date);
-                //         $scope.BPSwithETGS[item1].officer_id = $scope.BPSwithETGS[item1].es_officer_id;
-                //         AddRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey", "es_ETGS_id", "es_ETGS_bps_date", "es_ETGS_bps_id", "es_officer_id"));
-                //         // AddRecord
-                //     }
+                for(var item1 in $scope.BPSwithETGS)
+                {
+                    // Added In Case - Means New Insert without es_
+                    if($scope.BPSwithETGS[item1].es_ETGS_id == "")
+                    {
+                        $scope.BPSwithETGS[item1].ETGS_bps_id = $scope.BPSwithETGS[item1].es_ETGS_bps_id;
+                        $scope.BPSwithETGS[item1].ETGS_bps_date = FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item1].es_ETGS_bps_date);
+                        $scope.BPSwithETGS[item1].officer_id = $scope.BPSwithETGS[item1].es_officer_id;
+                        AddRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey", "es_ETGS_id", "es_ETGS_bps_date", "es_ETGS_bps_id", "es_officer_id"));
+                        // AddRecord
+                    }
 
-                //     // Edited In Case - Means update with es_
-                //     if($scope.BPSwithETGS[item1].es_ETGS_id != "")
-                //     {
-                //         EditRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey"));
-                //         // console.log( = $scope.BPSwithETGS[item1].es_ETGS_bps_date);
-                //     }
-                // }
+                    // Edited In Case - Means update with es_
+                    if($scope.BPSwithETGS[item1].es_ETGS_id != "")
+                    {
+                        EditRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey"));
+                        // console.log( = $scope.BPSwithETGS[item1].es_ETGS_bps_date);
+                        console.log($scope);
+                    }
+                }
 
                 // console.log("Edited Records", EditRecord);
                 // console.log("Newly Added", AddRecord);
@@ -2513,7 +2514,7 @@
         }
 
         // Initialize It
-        $scope.GetTData();
+        // $scope.GetTData();
     });
     /******************************************* UPDATE Employee Controller End **************************************************/
 
