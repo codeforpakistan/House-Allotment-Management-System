@@ -131,7 +131,7 @@
                         <div class="both-bg-auto">
                             <label class="control-label" for="ETGS_Date">Entry to Government <br/> Service with BPS</label>
                             <div class="controls-custom" ng-repeat="each in BPSwithETGS">
-                                <select ng-options="bps.es_bps_id as bps.es_bps_title for bps in es_bps_details" class="input-small-custom select-default mrs mbm " name="bps" id="bps" ng-model="each.es_ETGS_bps_id">
+                                <select ng-options="bps.es_bps_id as bps.es_bps_title for bps in es_bps_details" class="input-small-custom select-default mrs mbm " name="bps" id="bps" ng-model="each.es_bps_id">
                                 </select>
                                 <input type="text" name="ETGS_Date" id="ETGS_Date" class="input-large-custom tooltips" placeholder="Format: {{format}}" required ng-model="each.es_ETGS_bps_date" />
                                 <button class="btn btn-danger customButton" ng-click="delete($index)"><i class="icon-remove icon-white"></i></button>

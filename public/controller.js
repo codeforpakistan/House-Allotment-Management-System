@@ -2264,7 +2264,7 @@
     /**************************************** SEARCH & DELETE Employee Controller Start ******************************************/
 
     /******************************************* UPDATE Employee Controller Start ************************************************/
-    Main_Module.controller('Update_Employee_Controller', function Update_Employee_Controller($routeParams, $filter, $window, FormatDate, $scope, $http, SimpleHttpRequest, FetchFileNames, ExtractFileNames, GenerateFilesList, CheckMultipleErrors, InsertPicHttpRequest, DelMainRecPicRecUnlinkPic, message)
+    Main_Module.controller('Update_Employee_Controller', function Update_Employee_Controller($routeParams, $filter, $window, FormatDate, $scope, $http, SimpleHttpRequest, SimpleDeleteHttpRequest, FetchFileNames, ExtractFileNames, GenerateFilesList, CheckMultipleErrors, InsertPicHttpRequest, DelMainRecPicRecUnlinkPic, message)
     {
         var officer_id = $routeParams.officer_id;
         $scope.field = {};
@@ -2272,9 +2272,10 @@
         
         // Push NEWLY ADDED Records To This OR Push Records which needs to be Deleted.
         // Records can be Added & Edit OR Delete & Edit at the same time.
-        var AddRecord  = [];
-        var DelRecord  = [];
-        var EditRecord = [];
+        var AddRecord   = [];
+        var DelRecord   = [];
+        var EditRecord  = [];
+        var SplicedItem = [];
 
         $scope.BPSwithETGS = [];
         $scope.add = function()
@@ -2285,10 +2286,10 @@
         {
             if(index != 0)
             {
+                SplicedItem.push($scope.BPSwithETGS[index]);
                 $scope.BPSwithETGS.splice(index, 1);
             }
         }
-
         /********************************** UPDATE DATA START *******************************/
         // $scope.GetTData = function()
         // {
@@ -2378,49 +2379,80 @@
 
 
         $scope.UpdateData = function()
-        {
-            // for(var item in $scope.BPSwithETGS )
-            // {
-            //     $scope.BPSwithETGS[item].es_ETGS_bps_date  = FormatDate.IncomingDateFilter(data.es_etgs[item].es_ETGS_bps_date);
-            // }
-
-            // console.log($scope.BPSwithETGS.length, "\n", $scope.ToCheckBPSwithETGS.length);
-
+        {   
+            // If Deleted AND Updated at the same time
             if($scope.BPSwithETGS.length < $scope.ToCheckBPSwithETGS.length)
             {
-                console.log("delete from database");
-            }
-            else if($scope.BPSwithETGS.length > $scope.ToCheckBPSwithETGS.length)
-            {
-                console.log($scope);
-                
-                for(var item1 in $scope.BPSwithETGS)
+                // Delete
+                for(var item in SplicedItem)
                 {
-                    // Added In Case - Means New Insert without es_
-                    if($scope.BPSwithETGS[item1].es_ETGS_id == "")
+                    SimpleDeleteHttpRequest.DeletedbRecord('DELETE', 'es_etgs', 'es_ETGS_id', SplicedItem[item].es_ETGS_id);
+                }
+                
+                // Updated
+                for(var item in $scope.BPSwithETGS)
+                {        
+                    if($scope.BPSwithETGS[item].es_ETGS_id != "")
                     {
-                        $scope.BPSwithETGS[item1].ETGS_bps_id = $scope.BPSwithETGS[item1].es_ETGS_bps_id;
-                        $scope.BPSwithETGS[item1].ETGS_bps_date = FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item1].es_ETGS_bps_date);
-                        $scope.BPSwithETGS[item1].officer_id = $scope.BPSwithETGS[item1].es_officer_id;
-                        AddRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey", "es_ETGS_id", "es_ETGS_bps_date", "es_ETGS_bps_id", "es_officer_id"));
-                        // AddRecord
-                    }
+                        EditRecord.push($scope.BPSwithETGS[item]);
+                        EditRecord[item].es_ETGS_bps_date = FormatDate.OutGoingDateFilter(EditRecord[item].es_ETGS_bps_date);
+                        EditRecord[item] = _.omit(EditRecord[item], "$$hashKey");
 
-                    // Edited In Case - Means update with es_
-                    if($scope.BPSwithETGS[item1].es_ETGS_id != "")
-                    {
-                        EditRecord.push(_.omit($scope.BPSwithETGS[item1], "$$hashKey"));
-                        // console.log( = $scope.BPSwithETGS[item1].es_ETGS_bps_date);
-                        console.log($scope);
+                        var id = EditRecord[item].es_ETGS_id
+                        var DataLoad = EditRecord[item];
+
+                        SimpleHttpRequest.Update('UPDATE', 'es_etgs', 'es_ETGS_id', id, DataLoad)
                     }
                 }
-
-                // console.log("Edited Records", EditRecord);
-                // console.log("Newly Added", AddRecord);
             }
+            // If Inserted AND Updated at the same time
+            else if($scope.BPSwithETGS.length > $scope.ToCheckBPSwithETGS.length)
+            {
+                for(var item in $scope.BPSwithETGS)
+                {   
+                    //Inserted
+                    if($scope.BPSwithETGS[item].es_ETGS_id == "")
+                    {
+                        $scope.BPSwithETGS[item].bps_id = $scope.BPSwithETGS[item].es_bps_id;
+                        $scope.BPSwithETGS[item].ETGS_bps_date = FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item].es_ETGS_bps_date);
+                        $scope.BPSwithETGS[item].officer_id = $scope.BPSwithETGS[item].es_officer_id;
+                        AddRecord = _.omit($scope.BPSwithETGS[item], "$$hashKey", "es_ETGS_id", "es_ETGS_bps_date", "es_bps_id", "es_officer_id");
+
+                        SimpleHttpRequest.Insert('POST', 'INSERT', 'es_etgs', AddRecord)
+                    }
+
+                    // Updated
+                    if($scope.BPSwithETGS[item].es_ETGS_id != "")
+                    {
+                        EditRecord.push($scope.BPSwithETGS[item]);
+                        EditRecord[item].es_ETGS_bps_date = FormatDate.OutGoingDateFilter(EditRecord[item].es_ETGS_bps_date);
+                        EditRecord[item] = _.omit(EditRecord[item], "$$hashKey");
+
+                        var id = EditRecord[item].es_ETGS_id
+                        var DataLoad = EditRecord[item];
+
+                        SimpleHttpRequest.Update('UPDATE', 'es_etgs', 'es_ETGS_id', id, DataLoad)
+                    }
+                }
+            }
+            // If ONLY Updated
             else
             {
-                // Go For Simple Update which eleminates the possibility if Added & Edited OR Deleted & Edited happend at the same time.
+                for(var item in $scope.BPSwithETGS)
+                {   
+                    // Updated
+                    if($scope.BPSwithETGS[item].es_ETGS_id != "")
+                    {
+                        EditRecord.push($scope.BPSwithETGS[item]);
+                        EditRecord[item].es_ETGS_bps_date = FormatDate.OutGoingDateFilter(EditRecord[item].es_ETGS_bps_date);
+                        EditRecord[item] = _.omit(EditRecord[item], "$$hashKey");
+
+                        var id = EditRecord[item].es_ETGS_id
+                        var DataLoad = EditRecord[item];
+
+                        SimpleHttpRequest.Update('UPDATE', 'es_etgs', 'es_ETGS_id', id, DataLoad)
+                    }
+                }
             }
 
             $scope.field.es_officer_dob = FormatDate.OutGoingDateFilter($scope.field.officer_dob);
@@ -2438,57 +2470,54 @@
 
             var formFields = _.omit(values, "pictureNames", "officer_dob", "officer_EGS", "officer_doappt", "officer_dor", "officer_dop", "officer_EDFA");
 
-            // console.log(formFields);
-            // console.log($scope);
+            SimpleHttpRequest.Update('UPDATE', 'es_officers', 'es_officer_id', officer_id, formFields)
+            .then(function (response)
+            {
+                if(!response.data.Error)
+                {
+                    if(FetchFileNames.GetUploaderStatus())
+                    {
+                        setTimeout(function()
+                        {
+                            var NamesList = ExtractFileNames.UploadedFileNames(FetchFileNames.GetData2());
 
-            // SimpleHttpRequest.Update('UPDATE', 'es_officers', 'es_officer_id', officer_id, formFields)
-            // .then(function (response)
-            // {
-            //     if(!response.data.Error)
-            //     {
-            //         if(FetchFileNames.GetUploaderStatus())
-            //         {
-            //             setTimeout(function()
-            //             {
-            //                 var NamesList = ExtractFileNames.UploadedFileNames(FetchFileNames.GetData2());
+                            var NamesWithID = GenerateFilesList.FilesListWithID(NamesList, 'officer_id', officer_id);
 
-            //                 var NamesWithID = GenerateFilesList.FilesListWithID(NamesList, 'officer_id', officer_id);
+                            InsertPicHttpRequest.InsertPicture(NamesWithID)
+                            .then(function successCallback(response)
+                            {
+                                var results1 = CheckMultipleErrors.Check(response);
 
-            //                 InsertPicHttpRequest.InsertPicture(NamesWithID)
-            //                 .then(function successCallback(response)
-            //                 {
-            //                     var results1 = CheckMultipleErrors.Check(response);
+                                if(!results1)
+                                {
+                                    message.successMessageForUpdate("<strong>Successfull !</strong> Data Updated With New Pictures.");
+                                }
+                                else
+                                {
+                                    message.failedMessageForUpdate("<strong>Error !</strong> New Pictures Insertion Failed.");
+                                }
+                            },
+                            function errorCallback(response)
+                            {
+                                message.failedMessageForUpdate("<strong>Error !</strong> Pictures Updating Failed.");
+                            });
 
-            //                     if(!results1)
-            //                     {
-            //                         message.successMessageForUpdate("<strong>Successfull !</strong> Data Updated With New Pictures.");
-            //                     }
-            //                     else
-            //                     {
-            //                         message.failedMessageForUpdate("<strong>Error !</strong> New Pictures Insertion Failed.");
-            //                     }
-            //                 },
-            //                 function errorCallback(response)
-            //                 {
-            //                     message.failedMessageForUpdate("<strong>Error !</strong> Pictures Updating Failed.");
-            //                 });
-
-            //             }, 1000);
-            //         }
-            //         else
-            //         {
-            //             message.successMessageForUpdate("<strong>Successfull !</strong> Data Updated Without Any New Pictures.");
-            //         }
-            //     }
-            //     else
-            //     {
-            //         message.failedMessageForUpdate();
-            //     }
-            // },
-            // function errorCallback(response)
-            // {
-            //     message.failedMessageForUpdate();
-            // });
+                        }, 1000);
+                    }
+                    else
+                    {
+                        message.successMessageForUpdate("<strong>Successfull !</strong> Data Updated Without Any New Pictures.");
+                    }
+                }
+                else
+                {
+                    message.failedMessageForUpdate();
+                }
+            },
+            function errorCallback(response)
+            {
+                message.failedMessageForUpdate();
+            });
         }
 
         $scope.hideRow = [];
