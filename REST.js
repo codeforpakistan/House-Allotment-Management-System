@@ -44,7 +44,11 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         }
         else if(table_name == "es_officers")
         {
-            var query = "SELECT * FROM es_officers INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id";
+            var query = " SELECT * FROM es_officers INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id " + 
+                        " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id " +
+                        " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id " + 
+                        " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id ";
+                        // " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id ";
         }
         else
         {

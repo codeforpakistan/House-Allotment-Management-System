@@ -2095,7 +2095,7 @@
             })
             // .withDOM('frtip')
             .withOption('order', [0, 'asc'])
-            .withDisplayLength(10)
+            .withDisplayLength(100)
             .withPaginationType('full_numbers')
             .withButtons([
                 'print',
@@ -2111,31 +2111,35 @@
                 DTColumnBuilder.newColumn('es_officer_id').withTitle('ID'),
                 DTColumnBuilder.newColumn('es_officer_name').withTitle('Name'),
                 DTColumnBuilder.newColumn('es_officer_fname').withTitle('Father Name'),
-                DTColumnBuilder.newColumn('es_officer_personal_no').withTitle('Personal No'),
-                DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell No'),
+                DTColumnBuilder.newColumn('es_officer_personal_no').withTitle('P. No'),
+                // DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell No'),
 
                 DTColumnBuilder.newColumn('es_officer_dob').withTitle('D.O.B')
                 .renderWith(function(data, type)
                 {
-                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                    return $filter('date')(new Date(data), 'dd-MMM-yyyy');
                 }),
                 
                 DTColumnBuilder.newColumn('es_officer_doappt').withTitle('Date of Appt')
                 .renderWith(function(data, type)
                 {
-                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                    return $filter('date')(new Date(data), 'dd-MMM-yyyy');
                 }),
                 
                 DTColumnBuilder.newColumn('es_officer_dor').withTitle('Date of Ret')
                 .renderWith(function(data, type)
                 {
-                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                    return $filter('date')(new Date(data), 'dd-MMM-yyyy');
                 }),
                 
                 DTColumnBuilder.newColumn('es_bps_title').withTitle('BPS'),
                 DTColumnBuilder.newColumn('es_officer_cnic').withTitle('C.N.I.C'),//.notVisible()
+                DTColumnBuilder.newColumn('es_designation_title').withTitle('Designaiton'),//.notVisible()
+                // DTColumnBuilder.newColumn('es_department_name').withTitle('Dept'),//.notVisible(),
+                DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),//.notVisible(),
+                // DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type').notVisible(),
                 
-                DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '10.5%').notSortable().withClass('toggle')
+                DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '10.1%').notSortable().withClass('toggle')
                 .renderWith(function(data, type, full, meta)
                 {
                     return '<button class="btn btn-success customButton" ng-show="'+ data.es_officer_apply_status +' == 1" ng-click="Apply(' + data.es_officer_id + ')">' +
