@@ -3687,6 +3687,13 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
     margin-top: 0px;
 }
 
+.widget-body div.center
+{
+    text-align: center;
+    margin: 10px 0px 15px 0px;
+    padding: 10px 0px 15px 0px;
+}
+
 .table-condensed th, .table-condensed td
 {
     padding: 5px 20px;

@@ -171,20 +171,28 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
 
     /* SELECT QUERY FOR WAITING LISTS */
     // Format:                       es_officers/BPS-17/BPS-19
-    router.get('/WaitingList/:TableName/:BPSFrom/:BPSTo', function(req, res)
+    router.get('/WaitingList/:TableName/:BPSFrom/:BPSTo/:Employment_Type_ID_1/:Employment_Type_ID_2/:Service_Type_ID', function(req, res)
     {
-        var table_name = [req.params.TableName, req.params.BPSFrom, req.params.BPSTo];
+        var table_name = [req.params.TableName, req.params.BPSFrom, req.params.BPSTo, req.params.Employment_Type_ID_1, req.params.Employment_Type_ID_2, req.params.Service_Type_ID];
 
-        var query = "SELECT * FROM " + req.params.TableName + 
-                    " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id " +
-                    " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id " +
-                    " INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id " +
-                    " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id " +
-                    " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id " +
-                    " WHERE es_bps.es_bps_title >= '" + req.params.BPSFrom + "' " +
-                    " AND es_bps.es_bps_title <= '" + req.params.BPSTo + "' " + 
-                    " AND es_waiting_list.es_wl_status = '1' " + 
-                    " ORDER BY es_wl_id ASC ";
+        // Remember to put check on query If there are No two Emplyment type i.e No combined waiting list.
+        var query = "SELECT * FROM " +req.params.TableName+ 
+                    " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id" +
+                    " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id" +
+                    " INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id" +
+                    " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id" +
+                    " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id" +
+                    " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id" +
+                    " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id" +
+                    " INNER JOIN es_etgs on es_officers.es_officer_id = es_etgs.es_officer_id" +
+                    " WHERE es_bps.es_bps_id >= '" + req.params.BPSFrom + "'" + 
+                    " AND es_bps.es_bps_id <= '" + req.params.BPSTo + "'" + 
+                    " AND es_employment_type.es_employment_type_id = '" + req.params.Employment_Type_ID_1 + "' || '" + req.params.Employment_Type_ID_2 + "'" + 
+                    " AND es_service_type.es_service_type_id = '" + req.params.Service_Type_ID + "'" +
+                    " AND es_waiting_list.es_wl_status = '1'" +
+                    " ORDER BY es_wl_id ASC";
+
+        // res.send(query);
 
         query = mysql.format(query, table_name);
         connection.query(query, function(err, rows)

@@ -240,12 +240,14 @@
             return deffered.promise;
         }
 
-        SimpleHttpRequest.SelectWL = function(Method, APIAction, TableName, BPSFrom, BPSTo)
+        SimpleHttpRequest.SelectWL = function(Method, APIAction, TableName, BPSFrom, BPSTo, Employment_Type_ID_1, Employment_Type_ID_2, Service_Type_ID)
         {
             // Pattren : /WaitingList/:TableName/:BPSFrom/:BPSTo
-            // Pattren : /WaitingList/es_waiting_list/BPS-17/BPS-19
+            // Pattren : /WaitingList/es_waiting_list/BPS-17/BPS-19 // If Comparing with Title
+            // Pattren : /WaitingList/es_waiting_list/17/19 // If Comparing with ID
+            ///WaitingList/:TableName/:BPSFrom/:BPSTo/:Employment_Type_ID_1/:Employment_Type_ID_2/:Service_Type_ID
             var promise = $http({ 
-            url   : 'http://localhost:3000/api/'+APIAction+'/'+TableName+'/'+BPSFrom+'/'+BPSTo,
+            url   : 'http://localhost:3000/api/'+APIAction+'/'+TableName+'/'+BPSFrom+'/'+BPSTo+'/'+Employment_Type_ID_1+'/'+Employment_Type_ID_2+'/'+Service_Type_ID,
             method: Method
             })
             promise.then(function successCallback (response) 
@@ -932,8 +934,20 @@
 
         vm.dtOptions = DTOptionsBuilder.newOptions()
         // function for Ajax call
-        .withSource('http://localhost:3000/api/SELECT/es_house')
-        .withDataProp('es_house')
+        // .withSource('http://localhost:3000/api/SELECT/es_house') // Client Side
+        .withOption('ajax', {
+            // Either you specify the AjaxDataProp here
+            dataSrc: 'es_house',
+            url: 'http://localhost:3000/api/SELECT/es_house',
+            type: 'GET'
+        })
+
+        // .withDataProp('es_house') // Server Side - Client Side Both
+        .withOption('order', [0, 'asc'])
+        // .withDisplayLength(10)
+        .withOption('processing', true) // Server Side
+        .withOption('serverSide', true) // Server Side
+
         .withPaginationType('full_numbers');
         
         vm.dtColumns =
@@ -1893,75 +1907,73 @@
 
     /******************************************** INSERT Employee Controller Start ***********************************************/
     Main_Module.controller('Add_Employee_Controller', function Add_Employee_Controller($http, $window, $scope, SimpleHttpRequest, FetchFileNames, ExtractFileNames, GenerateFilesList, InsertPicHttpRequest, CheckMultipleErrors, message, DelMainRecPicRecUnlinkPic, FormatDate)
-    {   
-        $scope.field = {};
-        $scope.format = FormatDate.IncomingDateFilter(new Date());
-
-        $scope.BPSwithETGS = [{bps_id:'', ETGS_bps_date:''}];
-
-        $scope.add = function()
+    {
+        $scope.GetTData = function()
         {
-            $scope.BPSwithETGS.push({bps_id:'', ETGS_bps_date:''});
-        }
+            $scope.field = {};
+            $scope.format = FormatDate.IncomingDateFilter(new Date());
+            $scope.BPSwithETGS = [{bps_id:'', ETGS_bps_date:''}];
 
-        $scope.delete = function(index)
-        {
-            if(index != 0)
+            $scope.add = function()
             {
-                $scope.BPSwithETGS.splice(index, 1);
+                $scope.BPSwithETGS.push({bps_id:'', ETGS_bps_date:''});
             }
-        }
 
-        /********************************** FETCH DATA START *******************************/
-        $http.get('http://localhost:3000/api/SELECT/es_gender').success(function(data)
-        {
-            $scope.es_gender_details = data.es_gender;
-        });
+            $scope.delete = function(index)
+            {
+                if(index != 0)
+                {
+                    $scope.BPSwithETGS.splice(index, 1);
+                }
+            }
 
-        $http.get('http://localhost:3000/api/SELECT/es_marital_status').success(function(data)
-        {
-            $scope.es_marital_status_details = data.es_marital_status;
-        });
+            $http.get('http://localhost:3000/api/SELECT/es_gender').success(function(data)
+            {
+                $scope.es_gender_details = data.es_gender;
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_bps').success(function(data)
-        {
-            $scope.es_bps_details = data.es_bps;
-        });
+            $http.get('http://localhost:3000/api/SELECT/es_marital_status').success(function(data)
+            {
+                $scope.es_marital_status_details = data.es_marital_status;
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_designation').success(function(data)
-        {
-            $scope.es_designation_details = data.es_designation;
-        });
-        
-        $http.get('http://localhost:3000/api/SELECT/es_department').success(function(data)
-        {
-            $scope.es_department_details = data.es_department;
-        });
+            $http.get('http://localhost:3000/api/SELECT/es_bps').success(function(data)
+            {
+                $scope.es_bps_details = data.es_bps;
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_division').success(function(data)
-        {
-            $scope.es_division_details = data.es_division;
-        });
+            $http.get('http://localhost:3000/api/SELECT/es_designation').success(function(data)
+            {
+                $scope.es_designation_details = data.es_designation;
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_domicile').success(function(data)
-        {
-            $scope.es_domicile_details = data.es_domicile;
-        });
+            $http.get('http://localhost:3000/api/SELECT/es_department').success(function(data)
+            {
+                $scope.es_department_details = data.es_department;
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_employment_type').success(function(data)
-        {
-            $scope.es_employment_type = data.es_employment_type;
+            $http.get('http://localhost:3000/api/SELECT/es_division').success(function(data)
+            {
+                $scope.es_division_details = data.es_division;
+            });
+
+            $http.get('http://localhost:3000/api/SELECT/es_domicile').success(function(data)
+            {
+                $scope.es_domicile_details = data.es_domicile;
+            });
+
+            $http.get('http://localhost:3000/api/SELECT/es_employment_type').success(function(data)
+            {
+                $scope.es_employment_type = data.es_employment_type;
             $scope.field.employment_type_id = "1";
-        });
+            });
 
-        $http.get('http://localhost:3000/api/SELECT/es_service_type').success(function(data)
-        {
-            $scope.es_service_type = data.es_service_type;
-            // $scope.field.service_type_id = "1";
-        });
-        /********************************** FETCH DATA END *********************************/
+            $http.get('http://localhost:3000/api/SELECT/es_service_type').success(function(data)
+            {
+                $scope.es_service_type = data.es_service_type;
+            });
+        };
 
-        /********************************** INSERT DATA START ********************************/
         $scope.InsertData = function()
         {
             // Converting All Dates to MySQL Format
@@ -1975,7 +1987,7 @@
 
             if($scope.field.employment_type_id == "3")
             {
-                $scope.field.service_type_id = ""
+                $scope.field.service_type_id = "4"
             }
 
             var values = $scope.field;
@@ -1985,6 +1997,7 @@
             SimpleHttpRequest.Insert('POST','INSERT', 'es_officers', values)
             .then(function successCallback(response)
             {
+                // console.log(response);
                 if(!response.data.Error)
                 {
                     var id = response.data.LastID;
@@ -1994,13 +2007,24 @@
                     {
 
                         BPSwithETGS.push({"ETGS_bps_date": FormatDate.OutGoingDateFilter($scope.BPSwithETGS[item].ETGS_bps_date), "bps_id": $scope.BPSwithETGS[item].bps_id, "officer_id": id});
+                        
+                        // $http({
+                        //     url   : 'http://localhost:3000/api/INSERT/es_etgs',
+                        //     method: 'POST',
+                        //     data  : BPSwithETGS[item]
+                        // })
+                        // .then(function successCallback(response)
+                        // {
+                        //     console.log(response);
+                        // });
                     }
 
                     setTimeout(function()
-                    {
+                    {                        
                         SimpleHttpRequest.MultiInsert('POST', 'INSERT', 'es_etgs', BPSwithETGS)
                         .then(function successCallback (response)
                         {
+                            // console.log(response);
                             if(!response.data.Error)
                             {
                                 if(FetchFileNames.GetUploaderStatus())
@@ -2071,7 +2095,9 @@
                 message.failedMessageForInsert("<strong>Error!</strong> Insertion Failed !");
             });
         };
-        /********************************** INSERT DATA END **********************************/
+
+        //Initialize
+        $scope.GetTData();
     });
     /******************************************** INSERT Employee Controller End &&***********************************************/
 
@@ -2563,25 +2589,44 @@
             {
                 var deffered = $q.defer();
 
-                SimpleHttpRequest.SelectWL('GET', 'WaitingList', 'es_waiting_list', 'BPS-17', 'BPS-19')
+                // Pattern: '/WaitingList/:TableName/:BPSFrom/:BPSTo/:Employment_Type_ID_1/:Employment_Type_ID_2/:Service_Type_ID'
+                SimpleHttpRequest.SelectWL('GET', 'WaitingList', 'es_waiting_list', '17', '19', '1', '2', '4')
                 .then(function successCallback(response)
                 {
                     deffered.resolve(response.data.es_waiting_list);
                 });
 
                 return deffered.promise;
-            })
-            // .withDOM('frtip')
+            })            
             .withOption('order', [0, 'asc'])
             .withDisplayLength(10)
             .withPaginationType('full_numbers')
+            
+            .withDOM('frtip')
+            // Active Buttons extension
             .withButtons([
                 // 'columnsToggle',
-                // 'colvis',
+                'colvis',
                 // 'copy',
                 'print',
                 'excel'
+                // ,
+                // {
+                //     text: 'Some button',
+                //     key: '1',
+                //     action: function (e, dt, node, config) {
+                //         alert('Button activated');
+                //     }
+                // }
             ])
+            // .withButtons([
+            //     // 'columnsToggle',
+            //     'colvis',
+            //     // 'copy',
+            //     'print',
+            //     'excel'
+            // ])
+
             .withOption('createdRow', function(row, data, dataIndex)
             {
                 $compile(angular.element(row).contents())($scope);
@@ -2597,7 +2642,7 @@
                 DTColumnBuilder.newColumn('es_bps_title').withTitle('BPS').withOption('width', '6%'),
                 DTColumnBuilder.newColumn('es_department_name').withTitle('Department'),//.withOption('width', '14%'),
                 
-                DTColumnBuilder.newColumn('es_officer_EGS').withTitle('Date of E.G.S')
+                DTColumnBuilder.newColumn('es_ETGS_bps_date').withTitle('Date of E.T.G.S')
                 .renderWith(function(data, type)
                 {
                     return $filter('date')(new Date(data), 'dd-MM-yyyy');
@@ -2615,8 +2660,11 @@
                     return $filter('date')(new Date(data), 'dd-MM-yyyy');
                 }),
 
-                DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell'),
-                DTColumnBuilder.newColumn('es_officer_phone').withTitle('Phone'),
+                // DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell'),
+                // DTColumnBuilder.newColumn('es_officer_phone').withTitle('Phone'),
+
+                DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),
+                DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type'),
 
                 DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().withOption('width', '8%')
                 .renderWith(function(data, type, full, meta)
@@ -2772,7 +2820,6 @@
                 });
             });
         };
-
     });
     /*********************************************** ALLOT House Controller End **************************************************/
 
