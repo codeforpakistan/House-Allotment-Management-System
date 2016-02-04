@@ -10,7 +10,8 @@
         'Main_Module',
         'withAjax',
         'withPromise',
-        'withAngularWay'
+        'withAngularWay',
+        'withServerSide'
     ]);
 
     // app.config(function ($bootboxProvider)
@@ -27,6 +28,12 @@
                 //controller: 'dashboard_Controller'
             }).
             /********************************************* HOUSE START *********************************************/
+            when('/adtServer',
+            {
+                templateUrl: 'partials/adtServer.html',
+                controller: 'withServerSideController'
+            }).
+
             when('/adtAjax',
             {
                 templateUrl: 'partials/adtAjax.html',
@@ -137,11 +144,38 @@
                 controller: 'Directoriate_Controller'
             }).
 
+
+            /********************** Waiting List Start **********************/
             when('/wl3',
             {
                 templateUrl: 'partials/wl3.html',
                 controller: 'wl3_Controller'
             }).
+
+            when('/TwelveToFourteenSec',
+            {
+                templateUrl: 'partials/TwelveToFourteenSec.html',
+                controller: 'TwelveToFourteenSec_Controller'
+            }).
+
+            when('/OneToElevenSec',
+            {
+                templateUrl: 'partials/OneToElevenSec.html',
+                controller: 'OneToElevenSec_Controller'
+            }).
+
+            when('/OneToElevenAttached',
+            {
+                templateUrl: 'partials/OneToElevenAttached.html',
+                controller: 'OneToElevenAttached_Controller'
+            }).
+
+            when('/class4',
+            {
+                templateUrl: 'partials/class4.html',
+                controller: 'class4_Controller'
+            }).
+            /********************** Waiting List End ************************/
 
             when('/Allot_House/:officer_id',
             {

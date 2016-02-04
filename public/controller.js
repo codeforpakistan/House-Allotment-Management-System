@@ -863,6 +863,7 @@
     /*********************************************** Upload File End ************************************************************/
 
 
+    
     /*********************************************** DataTables Controller Start ************************************************/
     angular.module('withPromise', ['datatables', 'ngResource'])
     .controller('WithPromiseController', function WithPromiseController($scope, DTOptionsBuilder, DTColumnBuilder, $q, $http, $compile, SimpleHttpRequest)
@@ -926,31 +927,24 @@
             $scope.dtOptions.reloadData();
         };
     });
-    
+
+
     angular.module('withAjax', ['datatables'])
-    .controller('WithAjaxController', function WithAjaxController(DTOptionsBuilder, DTColumnBuilder)
+    .controller('WithAjaxController', function WithAjaxController(DTOptionsBuilder, DTColumnBuilder, $scope)
     {
-        var vm = this;
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax', {
+                url: 'http://localhost:3000/api/SELECT/es_house',
+                type: 'GET'
+            })
+            .withDataProp('es_house')
+            .withOption('serverSide', true)
+            .withOption('processing', true)
+            .withOption('order', [0, 'asc'])
+            .withDisplayLength(5)
+            .withPaginationType('full');
 
-        vm.dtOptions = DTOptionsBuilder.newOptions()
-        // function for Ajax call
-        // .withSource('http://localhost:3000/api/SELECT/es_house') // Client Side
-        .withOption('ajax', {
-            // Either you specify the AjaxDataProp here
-            dataSrc: 'es_house',
-            url: 'http://localhost:3000/api/SELECT/es_house',
-            type: 'GET'
-        })
-
-        // .withDataProp('es_house') // Server Side - Client Side Both
-        .withOption('order', [0, 'asc'])
-        // .withDisplayLength(10)
-        .withOption('processing', true) // Server Side
-        .withOption('serverSide', true) // Server Side
-
-        .withPaginationType('full_numbers');
-        
-        vm.dtColumns =
+        $scope.dtColumns =
         [
             DTColumnBuilder.newColumn('es_house_id').withTitle('ID'),
             DTColumnBuilder.newColumn('es_house_no').withTitle('House No'),
@@ -998,9 +992,44 @@
             console.log(id);
         };
     });
+
+    angular.module('withServerSide', ['datatables', 'ngResource'])
+    .controller('withServerSideController', function WithPromiseController($scope, DTOptionsBuilder, DTColumnBuilder)
+    {
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+            url: 'http://localhost:3000/api/SELECT/es_officers',
+            type: 'GET'
+        })
+        .withDataProp('es_officers')
+        .withDisplayLength(10)
+        .withOption('order', [0, 'asc'])
+        .withOption("bPaginate", true)
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withPaginationType('full_numbers');
+
+        //$scope.dtColumns =
+        //[
+        //    DTColumnBuilder.newColumn('es_house_id').withTitle('ID'),
+        //    DTColumnBuilder.newColumn('es_house_no').withTitle('House No'),
+        //    DTColumnBuilder.newColumn('es_house_rooms').withTitle('No of Rooms'),
+        //    DTColumnBuilder.newColumn('es_colony_name').withTitle('Colony'),
+        //    DTColumnBuilder.newColumn('es_city_name').withTitle('City'),//.notVisible()
+        //];
+
+        $scope.dtColumns =
+        [
+            DTColumnBuilder.newColumn('es_officer_id').withTitle('ID'),
+            DTColumnBuilder.newColumn('es_officer_name').withTitle('House No'),
+            DTColumnBuilder.newColumn('es_officer_fname').withTitle('No of Rooms'),
+            DTColumnBuilder.newColumn('es_officer_dob').withTitle('Colony')
+        ];
+    });
     /*********************************************** DataTables Controller End **************************************************/
 
 
+    
     /*********************************************** INSERT House Controller Start ***********************************************/
     Main_Module.controller('add_house_Controller', function add_house_Controller($http, $window, $scope, SimpleHttpRequest, FetchFileNames, ExtractFileNames, GenerateFilesList, InsertPicHttpRequest, CheckMultipleErrors, message, DelMainRecPicRecUnlinkPic)
     {   
@@ -1431,8 +1460,6 @@
     });
     /*************************************************** Colony Controller End ***************************************************/
 
-        
-
     /**************************************************** BPS Controller Start ***************************************************/
     Main_Module.controller('BPS_Controller', function BPS_Controller($q, $window, $scope, $http, $resource, $compile, DTOptionsBuilder, DTColumnBuilder, bootbox, SimpleHttpRequest, DelMainRecPicRecUnlinkPic, message)
     {
@@ -1546,8 +1573,6 @@
         $scope.GetTData();
     });
     /****************************************************** BPS Controller End ***************************************************/
-
-
 
     /*************************************************** Department Controller Start *********************************************/
     Main_Module.controller('Department_Controller', function Department_Controller($q, $window, $scope, $http, $resource, $compile, DTOptionsBuilder, DTColumnBuilder, bootbox, SimpleHttpRequest, DelMainRecPicRecUnlinkPic, message)
@@ -1671,8 +1696,6 @@
     });
     /*************************************************** Department Controller End ***********************************************/
 
-
-
     /******************************************** Designation Controller Start ***************************************************/
     Main_Module.controller('Designation_Controller', function Designation_Controller($q, $window, $scope, $http, $resource, $compile, DTOptionsBuilder, DTColumnBuilder, bootbox, SimpleHttpRequest, DelMainRecPicRecUnlinkPic, message)
     {
@@ -1786,8 +1809,6 @@
         $scope.GetTData();
     });
     /********************************************** Designation Controller End ***************************************************/
-
-
 
     /******************************************* Directoriate Controller Start ***************************************************/
     Main_Module.controller('Directoriate_Controller', function Directoriate_Controller($q, $window, $scope, $http, $resource, $compile, DTOptionsBuilder, DTColumnBuilder, bootbox, SimpleHttpRequest, DelMainRecPicRecUnlinkPic, message)
@@ -1905,6 +1926,7 @@
 
 
 
+   
     /******************************************** INSERT Employee Controller Start ***********************************************/
     Main_Module.controller('Add_Employee_Controller', function Add_Employee_Controller($http, $window, $scope, SimpleHttpRequest, FetchFileNames, ExtractFileNames, GenerateFilesList, InsertPicHttpRequest, CheckMultipleErrors, message, DelMainRecPicRecUnlinkPic, FormatDate)
     {
@@ -2165,7 +2187,7 @@
                 DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),//.notVisible(),
                 // DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type').notVisible(),
                 
-                DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '10.1%').notSortable().withClass('toggle')
+                DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '10.2%').notSortable().withClass('toggle')
                 .renderWith(function(data, type, full, meta)
                 {
                     return '<button class="btn btn-success customButton" ng-show="'+ data.es_officer_apply_status +' == 1" ng-click="Apply(' + data.es_officer_id + ')">' +
@@ -2578,8 +2600,9 @@
     /******************************************* UPDATE Employee Controller End **************************************************/
 
 
+    
 
-     /******************************************* WAITING LIST 3 Controller Start ************************************************/
+    /******************************************* WAITING LIST 3 Controller Start ************************************************/
     Main_Module.controller('wl3_Controller', function wl3_Controller($scope, $http, $filter, $q, $compile, DTOptionsBuilder, DTColumnBuilder,  SimpleHttpRequest, FormatDate)
     {
         $scope.GetTData = function()
@@ -2589,8 +2612,7 @@
             {
                 var deffered = $q.defer();
 
-                // Pattern: '/WaitingList/:TableName/:BPSFrom/:BPSTo/:Employment_Type_ID_1/:Employment_Type_ID_2/:Service_Type_ID'
-                SimpleHttpRequest.SelectWL('GET', 'WaitingList', 'es_waiting_list', '17', '19', '1', '2', '4')
+                SimpleHttpRequest.SelectWL('POST', 'WaitingList', 'es_waiting_list', '17', '19', '1', '2', '4')
                 .then(function successCallback(response)
                 {
                     deffered.resolve(response.data.es_waiting_list);
@@ -2601,31 +2623,12 @@
             .withOption('order', [0, 'asc'])
             .withDisplayLength(10)
             .withPaginationType('full_numbers')
-            
-            .withDOM('frtip')
-            // Active Buttons extension
+
             .withButtons([
-                // 'columnsToggle',
                 'colvis',
-                // 'copy',
                 'print',
                 'excel'
-                // ,
-                // {
-                //     text: 'Some button',
-                //     key: '1',
-                //     action: function (e, dt, node, config) {
-                //         alert('Button activated');
-                //     }
-                // }
             ])
-            // .withButtons([
-            //     // 'columnsToggle',
-            //     'colvis',
-            //     // 'copy',
-            //     'print',
-            //     'excel'
-            // ])
 
             .withOption('createdRow', function(row, data, dataIndex)
             {
@@ -2679,7 +2682,253 @@
         $scope.GetTData();            
     });
     /******************************************* WAITING LIST 3 Controller End ***************************************************/
+    
+    /************************************* WAITING LIST 1-11 Secretraiate Controller Start ***************************************/
+    Main_Module.controller('OneToElevenSec_Controller', function OneToElevenSec_Controller($scope, $http, $filter, $q, $compile, DTOptionsBuilder, DTColumnBuilder,  SimpleHttpRequest)
+    {
+        $scope.GetTData = function()
+        {
+            $scope.dtOptions = DTOptionsBuilder
+            .fromFnPromise(function()
+            {
+                var deffered = $q.defer();
 
+                SimpleHttpRequest.SelectWL('POST', 'WaitingList', 'es_waiting_list', '1', '11', '1', 'null', '4')
+                .then(function successCallback(response)
+                {
+                    deffered.resolve(response.data.es_waiting_list);
+                });
+
+                return deffered.promise;
+            })
+            .withOption('order', [0, 'asc'])
+            .withDisplayLength(10)
+            .withPaginationType('full_numbers')
+
+            .withButtons([
+                'colvis',
+                'print',
+                'excel'
+            ])
+
+            .withOption('createdRow', function(row, data, dataIndex)
+            {
+                $compile(angular.element(row).contents())($scope);
+            })
+
+            $scope.dtColumns =
+            [
+                DTColumnBuilder.newColumn('es_wl_id').withTitle('W.I.D'),
+                DTColumnBuilder.newColumn('es_officer_id').withTitle('O.I.D'),
+                DTColumnBuilder.newColumn('es_officer_name').withTitle('Name'),
+                DTColumnBuilder.newColumn('es_officer_fname').withTitle('Father Name'),
+                DTColumnBuilder.newColumn('es_designation_title').withTitle('Designation'),
+                DTColumnBuilder.newColumn('es_bps_title').withTitle('BPS').withOption('width', '6%'),
+                DTColumnBuilder.newColumn('es_department_name').withTitle('Department'),//.withOption('width', '14%'),
+
+                DTColumnBuilder.newColumn('es_ETGS_bps_date').withTitle('Date of E.T.G.S')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_application_date').withTitle('Date of Application')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_officer_dob').withTitle('Date of Birth')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                // DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell'),
+                // DTColumnBuilder.newColumn('es_officer_phone').withTitle('Phone'),
+
+                DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),
+                DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type'),
+
+                DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().withOption('width', '8%')
+                .renderWith(function(data, type, full, meta)
+                {
+                    return '<a class="btn btn-success" ng-href="#/Allot_House/' + data.es_officer_id + '">' +
+                        '<i class="icon-ok icon-white"></i> Allot' + '</a>';
+                })
+            ];
+        };
+
+        // Always Initialize it to Render the Tables
+        $scope.GetTData();
+    });
+    /************************************ WAITING LIST 1-11 Secretraiate Controller End ******************************************/
+
+    /************************************* WAITING LIST 1-11 Attached Controller Start *******************************************/
+    Main_Module.controller('OneToElevenAttached_Controller', function OneToElevenAttached_Controller($scope, $http, $filter, $q, $compile, DTOptionsBuilder, DTColumnBuilder,  SimpleHttpRequest)
+    {
+        $scope.GetTData = function()
+        {
+            $scope.dtOptions = DTOptionsBuilder
+            .fromFnPromise(function()
+            {
+                var deffered = $q.defer();
+
+                SimpleHttpRequest.SelectWL('POST', 'WaitingList', 'es_waiting_list', '1', '11', '2', 'null', '4')
+                .then(function successCallback(response)
+                {
+                    deffered.resolve(response.data.es_waiting_list);
+                });
+
+                return deffered.promise;
+            })
+            .withOption('order', [0, 'asc'])
+            .withDisplayLength(10)
+            .withPaginationType('full_numbers')
+
+            .withButtons([
+                'colvis',
+                'print',
+                'excel'
+            ])
+
+            .withOption('createdRow', function(row, data, dataIndex)
+            {
+                $compile(angular.element(row).contents())($scope);
+            })
+
+            $scope.dtColumns =
+            [
+                DTColumnBuilder.newColumn('es_wl_id').withTitle('W.I.D'),
+                DTColumnBuilder.newColumn('es_officer_id').withTitle('O.I.D'),
+                DTColumnBuilder.newColumn('es_officer_name').withTitle('Name'),
+                DTColumnBuilder.newColumn('es_officer_fname').withTitle('Father Name'),
+                DTColumnBuilder.newColumn('es_designation_title').withTitle('Designation'),
+                DTColumnBuilder.newColumn('es_bps_title').withTitle('BPS').withOption('width', '6%'),
+                DTColumnBuilder.newColumn('es_department_name').withTitle('Department'),//.withOption('width', '14%'),
+
+                DTColumnBuilder.newColumn('es_ETGS_bps_date').withTitle('Date of E.T.G.S')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_application_date').withTitle('Date of Application')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_officer_dob').withTitle('Date of Birth')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                // DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell'),
+                // DTColumnBuilder.newColumn('es_officer_phone').withTitle('Phone'),
+
+                DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),
+                DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type'),
+
+                DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().withOption('width', '8%')
+                .renderWith(function(data, type, full, meta)
+                {
+                    return '<a class="btn btn-success" ng-href="#/Allot_House/' + data.es_officer_id + '">' +
+                        '<i class="icon-ok icon-white"></i> Allot' + '</a>';
+                })
+            ];
+        };
+
+        // Always Initialize it to Render the Tables
+        $scope.GetTData();
+    });
+    /************************************** WAITING LIST 1-11 Attached Controller End ********************************************/
+
+    /************************************* WAITING LIST 1-11 Class-IV Controller Start *******************************************/
+    Main_Module.controller('class4_Controller', function class4_Controller($scope, $http, $filter, $q, $compile, DTOptionsBuilder, DTColumnBuilder,  SimpleHttpRequest)
+    {
+        $scope.GetTData = function()
+        {
+            $scope.dtOptions = DTOptionsBuilder
+            .fromFnPromise(function()
+            {
+                var deffered = $q.defer();
+
+                SimpleHttpRequest.SelectWL('POST', 'WaitingList', 'es_waiting_list', '1', '11', '3', 'null', '4')
+                .then(function successCallback(response)
+                {
+                    deffered.resolve(response.data.es_waiting_list);
+                });
+
+                return deffered.promise;
+            })
+            .withOption('order', [0, 'asc'])
+            .withDisplayLength(10)
+            .withPaginationType('full_numbers')
+
+            .withButtons([
+                'colvis',
+                'print',
+                'excel'
+            ])
+
+            .withOption('createdRow', function(row, data, dataIndex)
+            {
+                $compile(angular.element(row).contents())($scope);
+            })
+
+            $scope.dtColumns =
+            [
+                DTColumnBuilder.newColumn('es_wl_id').withTitle('W.I.D'),
+                DTColumnBuilder.newColumn('es_officer_id').withTitle('O.I.D'),
+                DTColumnBuilder.newColumn('es_officer_name').withTitle('Name'),
+                DTColumnBuilder.newColumn('es_officer_fname').withTitle('Father Name'),
+                DTColumnBuilder.newColumn('es_designation_title').withTitle('Designation'),
+                DTColumnBuilder.newColumn('es_bps_title').withTitle('BPS').withOption('width', '6%'),
+                DTColumnBuilder.newColumn('es_department_name').withTitle('Department'),//.withOption('width', '14%'),
+
+                DTColumnBuilder.newColumn('es_ETGS_bps_date').withTitle('Date of E.T.G.S')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_application_date').withTitle('Date of Application')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                DTColumnBuilder.newColumn('es_officer_dob').withTitle('Date of Birth')
+                .renderWith(function(data, type)
+                {
+                    return $filter('date')(new Date(data), 'dd-MM-yyyy');
+                }),
+
+                // DTColumnBuilder.newColumn('es_officer_cell').withTitle('Cell'),
+                // DTColumnBuilder.newColumn('es_officer_phone').withTitle('Phone'),
+
+                DTColumnBuilder.newColumn('es_employment_type_name').withTitle('Emp Type'),
+                DTColumnBuilder.newColumn('es_service_type_name').withTitle('Service Type'),
+
+                DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable().withOption('width', '8%')
+                .renderWith(function(data, type, full, meta)
+                {
+                    return '<a class="btn btn-success" ng-href="#/Allot_House/' + data.es_officer_id + '">' +
+                        '<i class="icon-ok icon-white"></i> Allot' + '</a>';
+                })
+            ];
+        };
+
+        // Always Initialize it to Render the Tables
+        $scope.GetTData();
+    });
+    /************************************ WAITING LIST 1-11 Class-IV Controller End *********************************************/
+
+
+    
+    
     /*********************************************** ALLOT House Controller Start ************************************************/
     Main_Module.controller('Allot_House_Controller', function Allot_House_Controller($routeParams, $window, $http, $scope, SimpleHttpRequest, SimpleDeleteHttpRequest, FormatDate, message)
     {   

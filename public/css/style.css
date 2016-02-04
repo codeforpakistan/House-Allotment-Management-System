@@ -560,7 +560,7 @@ ul.sidebar-menu span.icon-box  {
     color: #ccc;
     text-decoration: none;
     text-shadow: 0 1px 1px #000;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: normal;
 }
 
@@ -3689,6 +3689,14 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
 
 .widget-body div.center
 {
+    text-align: center;
+    margin: 10px 0px 15px 0px;
+    padding: 10px 0px 15px 0px;
+}
+
+#dt-title {
+    clear: both;
+    font-weight: bold;
     text-align: center;
     margin: 10px 0px 15px 0px;
     padding: 10px 0px 15px 0px;
