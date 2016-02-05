@@ -152,10 +152,22 @@
                 controller: 'wl3_Controller'
             }).
 
+            when('/FifteenToSixteenSec',
+            {
+                templateUrl: 'partials/FifteenToSixteenSec.html',
+                controller: 'FifteenToSixteenSec_Controller'
+            }).
+
             when('/TwelveToFourteenSec',
             {
                 templateUrl: 'partials/TwelveToFourteenSec.html',
                 controller: 'TwelveToFourteenSec_Controller'
+            }).
+
+            when('/TwelveToFourteenAttached',
+            {
+                templateUrl: 'partials/TwelveToFourteenAttached.html',
+                controller: 'TwelveToFourteenAttached_Controller'
             }).
 
             when('/OneToElevenSec',

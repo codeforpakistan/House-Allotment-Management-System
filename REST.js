@@ -220,11 +220,13 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         var ET2 = req.params.Employment_Type_ID_2;
         var ST = req.params.Service_Type_ID;
 
-        if(BPSFrom >= '1' && BPSTo <= '11' && (ET1 >= '1' && ET1 <= '3') && ET2 == 'null' && ST == '4')
+        if(BPSFrom >= '1' && BPSTo <= '14' && (ET1 >= '1' && ET1 <= '3') && ET2 == 'null' && ST == '4')
         {
-            // Query for (BPS 1-11) Secretraiate - ET1 = 1
-            // Query for (BPS 1-11) Attached Departments - ET1 = 2
-            // Query for (BPS 1-11) Class-IV - ET1 = 3
+            // Query for (BPS 12-14) Secretraiate         | Query = ('12', '14', "1", 'null', '4')
+            // Query for (BPS 12-14) Attached Departments | Query = ('12', '14', "2", 'null', '4')
+            // Query for (BPS 1-11) Secretraiate          | Query = ('1', '11', "1", 'null', '4')
+            // Query for (BPS 1-11) Attached Departments  | Query = ('1', '11', "2", 'null', '4')
+            // Query for (BPS 1-11) Class-IV              | Query = ('1', '11', "3", 'null', '4')
             var query = "SELECT * FROM " +TblName+
                 " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id" +
                 " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id" +
@@ -242,7 +244,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
                 " AND es_officers.es_officer_apply_status = '0'" +
                 " ORDER BY es_wl_id ASC";
         }
-        else if(BPSFrom >= '12' && BPSTo <= '14' && ET1 == '1' && ET2 == 'null' && ST == '4')
+        else if(BPSFrom >= '15' && BPSTo <= '16' && (ET1 == '1' || ET1 == '2') && ET2 == 'null' && ST == '4')
         {
             // Query for (BPS 1-11) Secretariat ONLY
             var query = "SELECT * FROM " +TblName+
