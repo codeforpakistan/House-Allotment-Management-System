@@ -22,19 +22,19 @@
             .when('/dashboard', {
                 controller: 'HomeController',
                 templateUrl: 'partials/dashboard.html',
-                controllerAs: 'vm'
+                // controllerAs: 'vm'
             })
 
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'authentication/login.html',
-                controllerAs: 'vm'
+                // controllerAs: 'vm'
             })
 
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'authentication/register.html',
-                controllerAs: 'vm'
+                // controllerAs: 'vm'
             })
 
             /***************************** ANGULAR DT TESTING START *****************************/
