@@ -13,33 +13,37 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(username, password, callback)
+        {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
-                        }
-                        callback(response);
-                    });
-            }, 1000);
+            // $timeout(function () {
+            //     var response;
+            //     UserService.GetByUsername(username)
+            //         .then(function (user) {
+            //             if (user !== null && user.password === password) {
+            //                 response = { success: true };
+            //             } else {
+            //                 response = { success: false, message: 'Username or password is incorrect' };
+            //             }
+            //             callback(response);
+            //         });
+            // }, 1000);
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-
+            $http.post('/api/UserLogin/es_user', { username: username, password: password })
+            .success(function (response)
+            {
+                console.log(response);
+                
+                callback(response);
+            });
         }
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password)
+        {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
@@ -49,6 +53,9 @@
                 }
             };
 
+            console.log($rootScope);
+            $rootScope.SessionRegistered = true;
+            
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         }
@@ -57,6 +64,9 @@
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
+            
+            $rootScope.SessionRegistered = false;
+            
         }
     }
 

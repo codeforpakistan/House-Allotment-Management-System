@@ -3229,10 +3229,16 @@ button.close {
 .btn.active,
 .btn.disabled,
 .btn[disabled] {
-  color: #333333;
+  /*color: #333333;*/
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
 }
+
+/*.btn[disabled] {
+  color: #333333;
+  background-color: #e6e6e6;
+  *background-color: #d9d9d9;
+}*/
 
 .btn:active,
 .btn.active {
@@ -3272,7 +3278,7 @@ button.close {
 .btn.disabled,
 .btn[disabled] {
   cursor: default;
-  background-image: none;
+  /*background-image: none;*/
   opacity: 0.65;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;

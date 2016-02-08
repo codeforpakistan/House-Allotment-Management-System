@@ -389,7 +389,7 @@ a,a:focus, a:hover, a:active {
 	background-image: url("../img/body-bg.png") !important;
 }
 
-#main-content {
+/*#main-content {
     margin-top: 0px;
     margin-left: 215px;
     min-height: 800px;
@@ -401,8 +401,22 @@ a,a:focus, a:hover, a:active {
     margin-left: 0px;
     min-height: 800px;
     background: #f7f7f7 url("../img/body-bg.png");
+}*/
+
+
+.main-content {
+    margin-top: 0px;
+    margin-left: 215px;
+    min-height: 800px;
+    background: #f7f7f7 url("../img/body-bg.png");
 }
 
+.main-content2 {
+    margin-top: 0px;
+    margin-left: 0px;
+    min-height: 685px;
+    background: #f7f7f7 url("../img/body-bg.png");
+}
 
 
 /* page container */
@@ -465,6 +479,10 @@ ul.sidebar-menu span.icon-box  {
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+}
+
+#sidebar{
+    margin-top: 60px;
 }
 
 #sidebar.closed {
@@ -3546,6 +3564,12 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
     margin-bottom: 10px;
 }
 
+.form-horizontal .controls-forfull {
+    margin-left: 75px;
+    margin-bottom: 0px;
+    /* border:1px solid #000; */
+}
+
 .form-bg { width:100%; height:auto; float:left!important; }
 
 .small-bg2 { width:60px; height:auto; float:left; margin-right:10px; margin-left:20px;}
@@ -3573,6 +3597,15 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
     /* border:1px solid #000; */
 }
 
+.form-horizontal .control-label-custom
+{
+    text-align: left;
+    margin-left: 0px;
+    padding-top: 10px;
+    width: auto;
+    /* border: 1px solid #000; */ 
+}
+
 .form-horizontal .controllabelsearchlarge
 {
     text-align: left;
@@ -3592,6 +3625,14 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
     width: 100%;
     float: right;
     margin-right: 10px;
+    /* border:1px solid #000; */
+}
+
+.form-horizontal .input-medium-custom
+{
+    width: 92%;
+    float: right;
+    margin-right: 0px;
     /* border:1px solid #000; */
 }
 
@@ -3688,12 +3729,34 @@ input[type="time"], input[type="week"], input[type="number"], input[type="email"
     /* border: 1px solid #555EEE; */
 }
 
+.full-bg
+{
+    height: auto;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    /*border: 1px solid #000;*/
+}
+
 .form-horizontal .inputRadio
 {
     opacity: 1;
     margin-left: -5px;
     display: inline-block;
     margin-top: 0px;
+}
+
+.register-margin
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.floatRight
+{
+    float: right;
 }
 
 .widget-body div.center

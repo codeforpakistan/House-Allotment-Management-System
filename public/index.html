@@ -43,14 +43,14 @@
 
     <!-- Angular DatePicker | Angular Material Stylesheet is here just for better texture -->
     <link rel="stylesheet" href="angular-material/angular-material-1.0.2.css">
-    <link rel="stylesheet" href="Angular-DatePicker/angular-datepicker.css">
+    <!-- <link rel="stylesheet" href="Angular-DatePicker/angular-datepicker.css"> -->
 
 </head>
 
-<body class="fixed-top">
+<body>
 
     <!-- NAVBAR START -->
-    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+    <div ng-if="SessionRegistered" id="header" class="navbar navbar-inverse navbar-fixed-top">
 
         <!-- TOP NAVIGATION BAR START -->
         <div class="navbar-inner">
@@ -129,7 +129,8 @@
 	<div id="container" class="row-fluid">
 
         <!-- SIDEBAR START -->
-		<div id="sidebar" class="nav-collapse collapse">
+        <div  ng-show="SessionRegistered" id="sidebar" class="nav-collapse collapse">
+		
 
             <!-- SIDEBAR TOGGLER BUTTON START -->
 			<div class="sidebar-toggler hidden-phone"></div>
@@ -198,8 +199,8 @@
                     <ul class="sub">
                         <li><a class="" href="#/add_house">Add House</a></li>
                         <li><a class="" href="#/search_house">All Houses List</a></li>
-                        <li><a class="" href="#/">Available Houses</a></li>
-                        <li><a class="" href="#/">Occupied Houses</a></li>
+                        <li><a class="" href="#/availabe_houses">Available Houses</a></li>
+                        <li><a class="" href="#/occ">Occupied Houses</a></li>
                         <li><a class="" href="#/colony">Add Colony</a></li>
                         <li><a class="" href="#/search_colony">Search Colony</a></li>
                     </ul>
@@ -230,13 +231,14 @@
 		<!-- SIDEBAR END -->
 
 		<!-- PAGE START -->
-		<div id="main-content">
+		<div id="main-content" ng-class="(SessionRegistered==true) ? 'main-content' : 'main-content2'">
 
             <!-- PAGE CONTAINER START -->
 			<div class="container-fluid">
 
                 <!-- PAGE HEADER START -->
-				<div class="row-fluid">
+                <div ng-if="SessionRegistered" class="row-fluid">
+				
 					<div class="span12">
 
                         <!-- THEME CUSTOMIZER START -->
@@ -297,7 +299,7 @@
 
     <!-- FOOTER START -->
     <div id="footer">
-        2015 © www.RedStuioWeb.com - www.CodeForPakistan.com
+        <!-- 2015 © www.RedStuioWeb.com - www.CodeForPakistan.com -->
         <div class="span pull-right">
             <span class="go-top"><i class="icon-arrow-up"></i></span>
         </div>
@@ -378,11 +380,11 @@
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="controller.js"></script>
     <script type="text/javascript" src="authentication/authentication.service.js"></script>
-    <!-- // <script type="text/javascript" src="authentication/flash.service.js"></script> -->
+    <script type="text/javascript" src="authentication/flash.service.js"></script>
     <!-- Real user service that uses an api -->
-    <!-- <script type="text/javascript" src="app-services/user.service.js"></script> -->
+    <script type="text/javascript" src="authentication/user.service.js"></script>
     <!-- Fake user service for demo that uses local storage -->
-    <script type="text/javascript" src="authentication/user.service.local-storage.js"></script>
+    <!-- <script type="text/javascript" src="authentication/user.service.local-storage.js"></script> -->
     <script type="text/javascript" src="authentication/home.controller.js"></script>
     <script type="text/javascript" src="authentication/login.controller.js"></script>
     <script type="text/javascript" src="authentication/register.controller.js"></script>

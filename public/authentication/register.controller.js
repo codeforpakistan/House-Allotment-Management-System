@@ -8,15 +8,23 @@
         var vm = this;
 
         vm.register = register;
+        $rootScope.SessionRegistered = false;
 
-        function register() {
+        function register()
+        {
             vm.dataLoading = true;
             UserService.Create(vm.user)
-                .then(function (response) {
-                    if (response.success) {
+                .then(function (response)
+                {
+                    if (response.success) 
+                    {
+                        console.log(response);
+                        
                         FlashService.Success('Registration successful', true);
                         $location.path('/login');
-                    } else {
+                    } 
+                    else 
+                    {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }

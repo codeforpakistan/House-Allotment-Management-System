@@ -9,6 +9,7 @@
 
     var Main_Module = angular.module('Main_Module', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngAnimate', 'flash', 'ngDroplet', 'datatables', 'ngResource', 'datatables.buttons', 'angular-bootbox', 'datePicker', 'ui.bootstrap']);
 
+    
     Main_Module.directive('uploadfile', ['FetchFileNames', function (FetchFileNames)
     {
         return {
@@ -1386,6 +1387,7 @@
                 }),
 
                 DTColumnBuilder.newColumn('es_officer_personal_no').withTitle('Personal No'),
+                DTColumnBuilder.newColumn('es_house_id').withTitle('HID'),
                 DTColumnBuilder.newColumn('es_house_no').withTitle('House No'),
                 DTColumnBuilder.newColumn('es_colony_name').withTitle('Colony Name'),
                 DTColumnBuilder.newColumn('es_occupied_house_doalt').withTitle('Date of Allotmemnt').withOption('width', '9%')

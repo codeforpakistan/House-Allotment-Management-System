@@ -16,6 +16,12 @@
 
         return service;
 
+        // User Registration
+        function Create(user)
+        {
+            return $http.post('/api/UserRegisration/es_user', user).then(handleSuccess, handleError('Error creating user'));
+        }
+
         function GetAll() {
             return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
         }
@@ -28,9 +34,6 @@
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function Create(user) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
-        }
 
         function Update(user) {
             return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));

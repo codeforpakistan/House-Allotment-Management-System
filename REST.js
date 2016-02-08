@@ -9,6 +9,8 @@ var express     = require('express');
 var app         = express();
 var multer      = require("multer");
 var fs          = require('fs');
+var crypto = require('crypto');
+var assert = require('assert');
 // var url = require('url');
 
 
@@ -38,14 +40,15 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
     /* SELECT for Available House List */
     router.get('/HouseList/:TableName', function(req, res)
     {
-        var table_name = [req.params.TableName, req.params.List];
+        var table_name = [req.params.TableName];
         
         if(req.params.TableName == "es_house")
         {
             var query = "SELECT * FROM es_house " +
                         " INNER JOIN es_city on es_house.es_city_id = es_city.es_city_id" +
                         " INNER JOIN es_colony on es_house.es_colony_id = es_colony.es_colony_id" +
-                        " WHERE es_house_id != (SELECT es_house_id FROM es_occupied_house) AND es_house_occupied_status = '0'";
+                        // " WHERE es_house_id != (SELECT es_house_id FROM es_occupied_house) AND es_house_occupied_status = '0'";
+                        " WHERE es_house_occupied_status = '0'";
         }
         
         query = mysql.format(query, table_name);
@@ -53,7 +56,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         {
             if(err)
             {
-                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.json({"Error" : true, "Message" : err.toString()});
             }
             else
             {
@@ -398,6 +401,95 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         });
     });
 
+
+
+
+    /* USER REGISTRATION */
+    router.post("/UserRegisration/:TableName", function(req, res)
+    {
+        if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.username || !req.body.password)
+        {  
+            res.send('All fields are required');
+            return;
+        }
+        else
+        {
+            var table = [req.params.TableName];
+
+            // Algorithm Type
+            var algorithm = 'aes256'; // or any other algorithm supported by OpenSSL
+            // For Password
+            var keyP = 'MyKeyToEncryptPassword';
+            var cipherP = crypto.createCipher(algorithm, keyP);
+            var encryptedPassword = cipherP.update(req.body.password, 'utf8', 'hex') + cipherP.final('hex');
+            // For Username
+            var keyU = 'MyKeyToEncryptUsername';
+            var cipherU = crypto.createCipher(algorithm, keyU);
+            var encryptedUsername = cipherU.update(req.body.username, 'utf8', 'hex') + cipherU.final('hex');
+
+            // res.send({"Username": encryptedUsername, "Password": encryptedPassword});
+            // Decypher for Later use
+            // var decipher = crypto.createDecipher(algorithm, key);
+            // var decrypted = decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8');
+            // assert.equal(decrypted, text);
+
+            var query = "INSERT INTO "+req.params.TableName+
+                        " (es_user_firstname, es_user_lastname, es_user_email, es_user_username, es_user_password)"+
+                        " VALUES ("+ "'"+req.body.firstname+"', '"+req.body.lastname+"', '"+req.body.email+"', '"+encryptedUsername+"', '"+encryptedPassword+"')";
+
+            query = mysql.format(query, table);
+            connection.query(query, function(err, rows)
+            {
+                if(err)
+                {
+                    res.json({"Error" : true, "success" : false, "Message": "Error executing MySQL query"});
+                }
+                else
+                {
+                    res.json({"Error" : false, "success" : true, "Users" : rows});
+                }
+            });
+        }        
+    });
+
+
+
+
+    /* SELECT */
+    router.post("/UserLogin/:TableName", function(req, res)
+    {
+        var table = [req.params.TableName];
+        
+        // Algorithm Type
+        var algorithm = 'aes256'; // or any other algorithm supported by OpenSSL
+        // For Password
+        var keyP = 'MyKeyToEncryptPassword';
+        var cipherP = crypto.createCipher(algorithm, keyP);
+        var encryptedPassword = cipherP.update(req.body.password, 'utf8', 'hex') + cipherP.final('hex');
+        // For Username
+        var keyU = 'MyKeyToEncryptUsername';
+        var cipherU = crypto.createCipher(algorithm, keyU);
+        var encryptedUsername = cipherU.update(req.body.username, 'utf8', 'hex') + cipherU.final('hex');
+
+        var query = "SELECT es_user_username, es_user_password FROM " +req.params.TableName+
+                    " WHERE es_user_username = '"+encryptedUsername+"'" +
+                    " AND es_user_password = '"+encryptedPassword+"'" +
+                    " AND es_user_status = '1' LIMIT 1";
+
+        query = mysql.format(query, table);
+        connection.query(query, function(err, rows)
+        {
+            if(!err && rows.length !=0 && rows!= null && rows != "")
+            {
+                res.json({"Error" : false, "success" : true, "Users": rows});
+            }
+            else
+            {
+                res.json({"Error" : true, "success" : false});
+            }
+        });
+    });
+    
 
 
     

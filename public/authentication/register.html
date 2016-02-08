@@ -12,81 +12,70 @@
 <!-- BEGIN LOGIN FORM -->
 
   
-  <form name="form" ng-submit="vm.register()" role="form">
-        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-            <label for="username">First name</label>
-            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+  <form name="form" ng-submit="vm.register()" role="form" class="form-horizontal">
+        <h4>User Registration</h4>
+        
+        <div class="control-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+          <div class="full-bg">
+              <label class="control-label control-label-custom" for="firstName">First Name</label>
+              <div class="controls-forfull">
+                  <input type="text" placeholder="First Name" name="firstName" id="firstName" class="form-control input-medium-custom" ng-model="vm.user.firstname" autofocus required />
+                  <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+              </div>
+          </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-            <label for="username">Last name</label>
-            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
-            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+
+        <div class="control-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+          <div class="full-bg">
+              <label class="control-label control-label-custom" for="lastName">Last Name</label>
+              <div class="controls-forfull">
+                  <input type="text" placeholder="Last Name" name="lastName" id="lastName" class="form-control input-medium-custom" ng-model="vm.user.lastname" required />
+                  <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+              </div>
+          </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.username" required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+
+        <div class="control-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+          <div class="full-bg">
+              <label class="control-label control-label-custom" for="email">Email</label>
+              <div class="controls-forfull">
+                  <input type="email" placeholder="Email" name="email" id="email" class="form-control input-medium-custom" ng-model="vm.user.email" required />
+                  <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Last name is required</span>
+              </div>
+          </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
-            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+
+        <div class="control-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+          <div class="full-bg">
+              <label class="control-label control-label-custom" for="username">Username</label>
+              <div class="controls-forfull">
+                  <input type="text" placeholder="Username" name="username" id="username" class="form-control input-medium-custom" ng-model="vm.user.username" maxlength="20" required />
+                  <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Last name is required</span>
+              </div>
+          </div>
         </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
-            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a href="#/login" class="btn btn-link">Cancel</a>
+
+        <div class="control-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+          <div class="full-bg">
+              <label class="control-label control-label-custom" for="password">Password</label>
+              <div class="controls-forfull">
+                  <input type="password" placeholder="Password" name="password" id="password" class="form-control input-medium-custom" ng-model="vm.user.password" min="7" max="15" required />
+                  <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Last name is required</span>
+              </div>
+          </div>
         </div>
+
+        <div class="register-margin">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-block login-btn">Register&nbsp;&nbsp;<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
+            <a href="#/login" class="btn btn-link floatRight">Cancel</a>
+        </div>
+
     </form>
 
-
-<!-- <form name="form" ng-submit="vm.login()" role="form">
-  
-  <div class="control-wrap">
-      <h4>Register</h4>
-      
-      <div class="control-group">
-          <div class="controls">
-              <div class="input-prepend">
-                  <span class="add-on"><i class="icon-user"></i></span>
-                  <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" placeholder="Username" required />
-                  <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-              </div>
-          </div>
-      </div>
-      
-      <div class="control-group">
-          <div class="controls">
-              <div class="input-prepend">
-                  <span class="add-on"><i class="icon-key"></i></span>
-                  <input type="password" name="password" id="password" class="form-control" ng-model="vm.password" placeholder="Password" required />
-                  <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-              </div>
-              <div class="mtop10">
-
-                  <div class="block-hint pull-right">
-                      <a href="#/register" class="" id="forget-password">Register</a>
-                  </div>
-
-              </div>
-
-              <div class="clearfix space5"></div>
-          </div>
-
-      </div>
-  
-  </div>
-
-  <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" />
-
-  <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
-  <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-</form> -->
 <!-- END LOGIN FORM        
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div id="login-copyright">
-  2015 © www.RedStuioWeb.com - www.CodeForPakistan.com
+  <!-- 2015 © www.RedStuioWeb.com - www.CodeForPakistan.com -->
 </div>
 <!-- END COPYRIGHT -->
