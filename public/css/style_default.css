@@ -1,7 +1,14 @@
 body {
     color: #868686;
     background: #4c4c4c url(../img/bg-grey.jpg) !important;
+    /*background-image: url("../img/body-bg.png") !important;*/
 }
+
+#login-body {
+    background-color: #f7f7f7  !important;
+    background-image: url("../img/body-bg.png") !important;
+}
+
 #main-content {
     box-shadow: 0 0 10px #757575;
     -moz-box-shadow: 0 0 10px #757575;

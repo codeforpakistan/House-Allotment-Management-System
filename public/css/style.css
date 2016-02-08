@@ -396,6 +396,15 @@ a,a:focus, a:hover, a:active {
     background: #f7f7f7 url("../img/body-bg.png");
 }
 
+#main-content2 {
+    margin-top: 0px;
+    margin-left: 0px;
+    min-height: 800px;
+    background: #f7f7f7 url("../img/body-bg.png");
+}
+
+
+
 /* page container */
 .sidebar-toggler {
     -webkit-border-radius: 15px 0px 0px 15px;

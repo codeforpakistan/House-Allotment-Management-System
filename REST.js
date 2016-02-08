@@ -34,43 +34,37 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
 
 
 
-    /* SELECT ALL */
-    //router.post('/SELECT2/:TableName', function(req, res)
-    //{
-    //    var table_name = [req.params.TableName];
-    //    if(table_name == "es_house")
-    //    {
-    //        var query = "SELECT * FROM es_house HOUSEALIAS left join es_colony COLONYALIAS on COLONYALIAS.es_colony_id = HOUSEALIAS.es_colony_id" +
-    //            " left join es_city CITYALIAS on CITYALIAS.es_city_id = HOUSEALIAS.es_city_id";
-    //    }
-    //    else if(table_name == "es_officers")
-    //    {
-    //        var query = " SELECT * FROM es_officers INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id " +
-    //            " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id " +
-    //            " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id " +
-    //            " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id ";
-    //        // " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id ";
-    //    }
-    //    else
-    //    {
-    //        var query = "SELECT * FROM ??";
-    //    }
-    //    query = mysql.format(query, table_name);
-    //    connection.query(query, function(err, rows)
-    //    {
-    //        if(err)
-    //        {
-    //            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-    //        }
-    //        else
-    //        {
-    //            res.json({"Error" : false, "Message" : "Success", [req.params.TableName] : rows});
-    //        }
-    //    });
-    //});
-
-
     
+    /* SELECT for Available House List */
+    router.get('/HouseList/:TableName', function(req, res)
+    {
+        var table_name = [req.params.TableName, req.params.List];
+        
+        if(req.params.TableName == "es_house")
+        {
+            var query = "SELECT * FROM es_house " +
+                        " INNER JOIN es_city on es_house.es_city_id = es_city.es_city_id" +
+                        " INNER JOIN es_colony on es_house.es_colony_id = es_colony.es_colony_id" +
+                        " WHERE es_house_id != (SELECT es_house_id FROM es_occupied_house) AND es_house_occupied_status = '0'";
+        }
+        
+        query = mysql.format(query, table_name);
+        connection.query(query, function(err, rows)
+        {
+            if(err)
+            {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            }
+            else
+            {
+                res.json({"Error" : false, "Message" : "Success", [req.params.TableName] : rows});
+            }
+        });
+    });
+
+
+
+
     /* SELECT ALL */
     router.get('/SELECT/:TableName', function(req, res)
     {
@@ -87,6 +81,13 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
                         " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id " + 
                         " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id ";
                         // " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id ";
+        }
+        else if(table_name == "es_occupied_house")
+        {
+            var query = "SELECT * FROM es_occupied_house " +
+                        " INNER JOIN es_house on es_occupied_house.es_house_id = es_house.es_house_id" +
+                        " INNER JOIN es_colony on es_occupied_house.es_colony_id = es_colony.es_colony_id" +
+                        " INNER JOIN es_officers on es_occupied_house.es_officer_id = es_officers.es_officer_id";
         }
         else
         {
@@ -220,7 +221,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         var ET2 = req.params.Employment_Type_ID_2;
         var ST = req.params.Service_Type_ID;
 
-        if(BPSFrom >= '1' && BPSTo <= '14' && (ET1 >= '1' && ET1 <= '3') && ET2 == 'null' && ST == '4')
+        if(BPSFrom >= '1' && BPSTo <= '16' && (ET1 >= '1' && ET1 <= '3') && ET2 == 'null' && ST == '4')
         {
             // Query for (BPS 12-14) Secretraiate         | Query = ('12', '14', "1", 'null', '4')
             // Query for (BPS 12-14) Attached Departments | Query = ('12', '14', "2", 'null', '4')
@@ -244,9 +245,18 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
                 " AND es_officers.es_officer_apply_status = '0'" +
                 " ORDER BY es_wl_id ASC";
         }
-        else if(BPSFrom >= '15' && BPSTo <= '16' && (ET1 == '1' || ET1 == '2') && ET2 == 'null' && ST == '4')
+        else if(BPSFrom >= '17' && BPSTo <= '22' && ET1 == '1' && ET2 == '2')
         {
-            // Query for (BPS 1-11) Secretariat ONLY
+            if(ST == 'All' && ST != '4')
+            {
+                var QueryST = "(es_service_type.es_service_type_id = '1' OR es_service_type.es_service_type_id = '2' OR es_service_type.es_service_type_id = '3')"; 
+            }
+            else
+            {
+                var QueryST = "es_service_type.es_service_type_id = '4'";                
+            }
+
+            // Query for (BPS 17-19) Attached Secretraiate | Query = ('17', '19', "1", '2', '4')
             var query = "SELECT * FROM " +TblName+
                 " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id" +
                 " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id" +
@@ -258,52 +268,11 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
                 " INNER JOIN es_etgs on es_officers.es_officer_id = es_etgs.es_officer_id" +
                 " WHERE es_bps.es_bps_id >= '" + BPSFrom + "'" +
                 " AND es_bps.es_bps_id <= '" + BPSTo + "'" +
-                " AND es_employment_type.es_employment_type_id = '" + ET1 + "'" +
-                " AND es_service_type.es_service_type_id = '" + ST + "'" +
+                " AND (es_employment_type.es_employment_type_id = '" + ET1 + "' OR es_employment_type.es_employment_type_id = '" + ET2 + "')" +               
+                " AND " + QueryST +
                 " AND es_waiting_list.es_wl_status = '1'" +
                 " AND es_officers.es_officer_apply_status = '0'" +
                 " ORDER BY es_wl_id ASC";
-        }
-        // else if(BPSFrom >= '1' && BPSTo <= '11' && ET1 == '2' && ET2 == 'null' && ST == '4')
-        // {
-        //     // Query for (BPS 1-11) Secretariat ONLY
-        //     var query = "SELECT * FROM " +TblName+
-        //         " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id" +
-        //         " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id" +
-        //         " INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id" +
-        //         " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id" +
-        //         " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id" +
-        //         " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id" +
-        //         " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id" +
-        //         " INNER JOIN es_etgs on es_officers.es_officer_id = es_etgs.es_officer_id" +
-        //         " WHERE es_bps.es_bps_id >= '" + BPSFrom + "'" +
-        //         " AND es_bps.es_bps_id <= '" + BPSTo + "'" +
-        //         " AND es_employment_type.es_employment_type_id = '" + ET1 + "'" +
-        //         " AND es_service_type.es_service_type_id = '" + ST + "'" +
-        //         " AND es_waiting_list.es_wl_status = '1'" +
-        //         " AND es_officers.es_officer_apply_status = '0'" +
-        //         " ORDER BY es_wl_id ASC";
-        // }
-        else
-        {
-            // Query for WL3
-            res.send("Wrong Trigger");
-            // var query = "SELECT * FROM " +req.params.TableName+
-            //     " INNER JOIN es_officers on es_waiting_list.es_officer_id = es_officers.es_officer_id" +
-            //     " INNER JOIN es_application on es_officers.es_officer_id = es_application.es_officer_id" +
-            //     " INNER JOIN es_bps on es_officers.es_bps_id = es_bps.es_bps_id" +
-            //     " INNER JOIN es_designation on es_officers.es_designation_id = es_designation.es_designation_id" +
-            //     " INNER JOIN es_department on es_officers.es_department_id = es_department.es_department_id" +
-            //     " INNER JOIN es_employment_type on es_officers.es_employment_type_id = es_employment_type.es_employment_type_id" +
-            //     " INNER JOIN es_service_type on es_officers.es_service_type_id = es_service_type.es_service_type_id" +
-            //     " INNER JOIN es_etgs on es_officers.es_officer_id = es_etgs.es_officer_id" +
-            //     " WHERE es_bps.es_bps_id >= '" + req.params.BPSFrom + "'" +
-            //     " AND es_bps.es_bps_id <= '" + req.params.BPSTo + "'" +
-            //     //" AND es_employment_type.es_employment_type_id = '" + req.params.Employment_Type_ID_1 + "' || '" + req.params.Employment_Type_ID_2 + "'" +
-            //     //" AND es_service_type.es_service_type_id = '" + req.params.Service_Type_ID + "'" +
-            //     " AND es_waiting_list.es_wl_status = '1'" +
-            //     //" AND es_officers.es_officer_apply_status = '0'" +
-            //     " ORDER BY es_wl_id ASC";
         }
 
         query = mysql.format(query, table_name);
@@ -355,58 +324,6 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
         });
     });
 
-
-
-
-    // router.post('/MultiInsert/:TableName', function(req, res)
-    // {
-    //     var query_var = req.body;
-
-    //     var result = [];
-    //     var error = [];
-    //     var result = [];
-
-    //     for(var item in query_var)
-    //     {
-    //         var table_query = "INSERT INTO " + req.params.TableName + " (";
-    //         var table_var = " VALUES ( ";
-
-    //         for(var n in query_var[item]) 
-    //         {
-    //             table_query +=  "es_" + n + ", ";
-    //             table_var += "'" + query_var[item][n] + "', ";
-    //         }
-
-    //         table_query = table_query.substring(0, table_query.length - 2) + " )";
-    //         table_var = table_var.substring(0, table_var.length - 2) + " )";
-
-    //         var query = table_query + table_var;
-
-    //         connection.query(query, function(err, rows)
-    //         {
-    //             if(err)
-    //             {
-    //                 //res.json({"Error" : true, "Message" : err.toString() });
-    //                 error.push({"Error" : true, "Message" : err.toString() });
-    //             }
-    //             else
-    //             {
-    //                 result.push({"Error" : false, "Message" : "Inserted", "LastID" : rows.insertId });
-
-    //             }
-    //         });
-    //     }
-
-    //     if(error == null)
-    //     {
-    //          res.send(error);
-    //     }
-    //     else
-    //     {
-    //         res.send(result);
-    //     }
-    //     // res.send(query);
-    // });
 
 
 
@@ -483,48 +400,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
 
 
 
-    /*
-    router.put('/UPDATE/:TableName/:F1/:V1/:F2/:V2/:F3/:V3/:F4/:V4/:F5/:V5/:F6/:V6/:F7/:V7/:F8/:V8/:F9/:V9/:CF/:id', function(req, res) /* CF = Clause Field - WHERE clause field for instance es_house_id
-    {
-     var table_name = [req.params.TableName, req.params.F1, req.params.V1, req.params.F2, req.params.V2, req.params.F3, req.params.V3, req.params.F4, req.params.V4,
-                       req.params.F5, req.params.V5, req.params.F6, req.params.V6, req.params.F7, req.params.V7, req.params.F8, req.params.V8, req.params.F9, req.params.V9,
-                       req.params.CF, req.params.id];
-
-     var query = "UPDATE ?? SET ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ?, ?? = ? WHERE ?? = ?";
-     query = mysql.format(query, table_name);
-     connection.query(query, function(err, rows)
-     {
-         if(err)
-         {
-            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-         }
-         else
-         {
-            res.json({"Error" : false, "Message" : "Updated"});
-         }
-     });
-    });
-    */
-
-    /*
-    router.put("/users",function(req,res)
-    {
-        var query = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
-        var table = ["table1","password",md5(req.body.password),"user",req.body.user];
-        query = mysql.format(query,table);
-        connection.query(query,function(err,rows)
-        {
-            if(err)
-            {
-                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-            }
-            else
-            {
-                res.json({"Error" : false, "Message" : "Updated the password for email "+req.body.email});
-            }
-        });
-    });
-    */
+    
 
     /*
     router.get("/users",function(req, res)
