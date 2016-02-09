@@ -20,21 +20,21 @@
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/dashboard', {
-                controller: 'HomeController',
                 templateUrl: 'partials/dashboard.html',
-                // controllerAs: 'vm'
+                controller: 'HomeController',
+                controllerAs: 'vm'
             })
 
             .when('/login', {
-                controller: 'LoginController',
                 templateUrl: 'authentication/login.html',
-                // controllerAs: 'vm'
+                controller: 'LoginController',
+                controllerAs: 'vm'
             })
 
             .when('/register', {
-                controller: 'RegisterController',
                 templateUrl: 'authentication/register.html',
-                // controllerAs: 'vm'
+                controller: 'RegisterController',
+                controllerAs: 'vm'
             })
 
             /***************************** ANGULAR DT TESTING START *****************************/

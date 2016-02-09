@@ -17,9 +17,7 @@
                 .then(function (response)
                 {
                     if (response.success) 
-                    {
-                        console.log(response);
-                        
+                    {                        
                         FlashService.Success('Registration successful', true);
                         $location.path('/login');
                     } 

@@ -1,18 +1,14 @@
 
 <div class="login-header">
-  <!-- BEGIN LOGO -->
   <div id="logo" class="center">
       <img src="img/logo.png" alt="logo" class="center" />
   </div>
-  <!-- END LOGO -->
 </div>
 
-<!-- BEGIN LOGIN -->
-<div id="login">
-<!-- BEGIN LOGIN FORM -->
 
-  
-  <form name="form" ng-submit="vm.register()" role="form" class="form-horizontal">
+<div id="register">
+
+  <form name="form" ng-submit="vm.register()" role="form" class="form-horizontal" ng-controller="RegisterController">
         <h4>User Registration</h4>
         
         <div class="control-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
@@ -72,10 +68,4 @@
 
     </form>
 
-<!-- END LOGIN FORM        
-<!-- END LOGIN -->
-<!-- BEGIN COPYRIGHT -->
-<div id="login-copyright">
-  <!-- 2015 © www.RedStuioWeb.com - www.CodeForPakistan.com -->
 </div>
-<!-- END COPYRIGHT -->

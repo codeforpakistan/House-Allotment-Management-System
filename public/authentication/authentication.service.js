@@ -36,8 +36,6 @@
             $http.post('/api/UserLogin/es_user', { username: username, password: password })
             .success(function (response)
             {
-                console.log(response);
-                
                 callback(response);
             });
         }
@@ -53,7 +51,6 @@
                 }
             };
 
-            console.log($rootScope);
             $rootScope.SessionRegistered = true;
             
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line

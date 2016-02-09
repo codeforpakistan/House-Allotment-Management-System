@@ -1721,6 +1721,17 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     padding: 20px;
 }
 
+#register {
+
+    background:#e3e3e3;
+    box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    -webkit-box-shadow: 1px 0 1px #FFFFFF, 0 0 3px rgba(0, 0, 0, 0.2) inset;
+    width: 370px;
+    margin: 80px auto 0;
+    padding: 20px;
+}
+
 .login-btn {
     background: url("../img/login-btn.jpg");
     border: none;
@@ -1741,11 +1752,13 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     color: #fff;
 }
 
-#login .control-group {
+#login .control-group,
+#register .control-group {
     margin-bottom: -11px;
 }
 
-#login .form-actions {
+#login .form-actions,
+#register .form-actions {
     padding: 20px;
     margin-left: -20px;
     margin-right: -20px;
@@ -1756,15 +1769,20 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     margin-bottom: -37px;
 }
 
-#login input {
+#login input,
+#register input {
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
 }
-#login input[type=checkbox] {
+
+#login input[type=checkbox],
+#register input[type=checkbox] {
     margin-top: -3px;
 }
-#login span.add-on {
+
+#login span.add-on,
+#register span.add-on {
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -1773,15 +1791,18 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     text-shadow: none;
 }
 
-#login input {
+#login input,
+#register input {
     padding: 10px;
 }
 
-#login i {
+#login i,
+#register i {
     color: #999 !important;
 }
 
-#login #forget-password {
+#login #forget-password,
+#register #forget-password {
     font-size: 11px;
 }
 

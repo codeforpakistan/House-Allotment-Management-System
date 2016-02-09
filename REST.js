@@ -10,7 +10,7 @@ var app         = express();
 var multer      = require("multer");
 var fs          = require('fs');
 var crypto = require('crypto');
-var assert = require('assert');
+// var assert = require('assert');
 // var url = require('url');
 
 
@@ -493,7 +493,6 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection, md5)
 
 
     
-
     /*
     router.get("/users",function(req, res)
     {

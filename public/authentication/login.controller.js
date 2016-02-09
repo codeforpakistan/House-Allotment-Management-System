@@ -19,10 +19,9 @@
         function login() 
         {
             vm.dataLoading = true;
+
             AuthenticationService.Login(vm.username, vm.password, function (response)
             {
-                // console.log(response);
-
                 if (response.success)
                 {
                     AuthenticationService.SetCredentials(vm.username, vm.password);

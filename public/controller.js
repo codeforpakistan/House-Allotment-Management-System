@@ -7,7 +7,7 @@
 (function()
 {
 
-    var Main_Module = angular.module('Main_Module', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngAnimate', 'flash', 'ngDroplet', 'datatables', 'ngResource', 'datatables.buttons', 'angular-bootbox', 'datePicker', 'ui.bootstrap']);
+    var Main_Module = angular.module('Main_Module', ['angular-flash.service', 'angular-flash.flash-alert-directive', 'ngAnimate', 'flash', 'ngDroplet', 'datatables', 'ngResource', 'datatables.buttons', 'angular-bootbox']);
 
     
     Main_Module.directive('uploadfile', ['FetchFileNames', function (FetchFileNames)
