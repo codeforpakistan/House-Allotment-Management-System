@@ -7,7 +7,7 @@ Website: http://thevectorlab.net/
 
 /* body styles */
 body {
-	color: #000;
+	/*color: rgba(0, 0, 0, 0.87);*/
 	font-family: 'Arial';
 	padding: 0px !important;
 	margin: 0px !important;
@@ -629,7 +629,7 @@ ul.sidebar-menu span.icon-box  {
 
 /* footer container */
 #footer {
-    padding: 8px 20px 5px 20px;
+    padding: 22px 20px 5px 10px;
     font-size: 12px;
     color: #fff;
     text-align: center;

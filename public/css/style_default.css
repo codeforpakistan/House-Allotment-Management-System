@@ -1,7 +1,16 @@
 body {
-    color: #868686;
+    /*color: #868686;*/
     background: #4c4c4c url(../img/bg-grey.jpg) !important;
-    /*background-image: url("../img/body-bg.png") !important;*/
+    background-image: url("../img/bg-grey.jpg");
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(77, 77, 77);
 }
 
 #login-body {
@@ -16,7 +25,7 @@ body {
 }
 a, a:hover {
     text-shadow: none !important;
-    color: #4c4c4c;
+    color: #FFF;
 }
 ul.faq-list li a:hover, ul.faq-list li a.active{
     background: #22C0CB;
