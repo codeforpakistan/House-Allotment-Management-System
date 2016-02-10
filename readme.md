@@ -10,7 +10,7 @@
 
 ## Usage - Short Description
 ####Three Phase of Allotment:
-1. Add application, search it and approve the qequest.
+1. Add application, search it and approve the request.
 2. Find Application in waiting list and approve it.
 3. Allot the House.
 
@@ -19,7 +19,7 @@ A valid application is necessary for initializing the the allotment cycle, an ap
 the employee can be searched once founder there is green button on the right hand side parallel to each employee details. In order to add
 the employee request to waiting list that green button must be clicked to approve the request. once the request is successfully sent to
 waiting list it can be seen in the Relevant Waiting list, once the request is approved the allotment page will appear. to simplifcy and
-make thing efficent the colony must be selected first and than the house. and by clicking Allot... Voila we are all done.
+make thing efficent the colony must be selected first and then the house. and by clicking Allot... Voila we are all done.
 
 ## Features
 * Multiple User Login / User Registration.
