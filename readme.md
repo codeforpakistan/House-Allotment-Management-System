@@ -70,34 +70,34 @@ make thing efficent the colony must be selected first and than the house. and by
 ## ScreenShots:
 
 #### Registration-View
-![Registration-View](/screenshots/register.png?raw=true "Registration-View")
+![Registration-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/register.png?raw=true "Registration-View")
 
 #### Login-View
-![Login-View](/screenshots/login.png?raw=true "Login-View")
+![Login-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/login.png?raw=true "Login-View")
 
 #### DashBoard-View
-![DashBoard-View](/screenshots/dashboard.png?raw=true "Dashboard-View")
+![DashBoard-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/dashboard.png?raw=true "Dashboard-View")
 
 #### Add-Employee-Application-View
-![Add-Employee-Application-View](/screenshots/addemployee.png?raw=true "Add-Employee-Application-View")
+![Add-Employee-Application-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/addemployee.png?raw=true "Add-Employee-Application-View")
 
 #### Search-Employee-Application-View
-![Search-Employee-Application-View](/screenshots/searchemployee.png?raw=true "Search-Employee-Application-View")
+![Search-Employee-Application-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/searchemployee.png?raw=true "Search-Employee-Application-View")
 
 #### Add-House-View
-![Add-House-View](/screenshots/addhouse.png?raw=true "Add-House-View")
+![Add-House-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/addhouse.png?raw=true "Add-House-View")
 
 #### Search-House-View
-![Search-House-View](/screenshots/searchhouse.png?raw=true "Search-House-View")
+![Search-House-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/searchhouse.png?raw=true "Search-House-View")
 
 #### Available-Houses-View
-![Available-Houses-View](/screenshots/availablehouses.png?raw=true "Available-Houses-View")
+![Available-Houses-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/availablehouses.png?raw=true "Available-Houses-View")
 
 #### Occupied-Houses-View
-![Occupied-Houses-View](/screenshots/occupiedhouses.png?raw=true "Occupied-Houses-View")
+![Occupied-Houses-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/occupiedhouses.png?raw=true "Occupied-Houses-View")
 
 #### Add-Search-Colony-View
-![Add/Search-Colony-View](/screenshots/add-seach-colony.png?raw=true "Add/Search-Colony-View")
+![Add/Search-Colony-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/add-seach-colony.png?raw=true "Add/Search-Colony-View")
 
 #### WaitingList-View
-![WaitingList-View](/screenshots/wl.png?raw=true "WaitingList-View")
+![WaitingList-View](https://github.com/codeforpakistan/House-Allotment-Management-System/screenshots/wl.png?raw=true "WaitingList-View")

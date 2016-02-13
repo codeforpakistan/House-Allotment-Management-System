@@ -2141,6 +2141,8 @@
 
             var values = _.omit(values, "es_officer_dob", "es_officer_doappt", "es_officer_dor", "es_officer_dop", "es_officer_EDFA");
 
+            console.log(values);
+
             SimpleHttpRequest.Insert('POST','INSERT', 'es_officers', values)
             .then(function successCallback(response)
             {
@@ -2166,18 +2168,17 @@
                         // });
                     }
 
-                    setTimeout(function()
-                    {                        
+                    // setTimeout(function()
+                    // {                        
                         SimpleHttpRequest.MultiInsert('POST', 'INSERT', 'es_etgs', BPSwithETGS)
                         .then(function successCallback (response)
                         {
-                            // console.log(response);
                             if(!response.data.Error)
                             {
                                 if(FetchFileNames.GetUploaderStatus())
                                 {
-                                    setTimeout(function()
-                                    {
+                                    // setTimeout(function()
+                                    // {
                                         var NamesList = ExtractFileNames.UploadedFileNames(FetchFileNames.GetData2());
 
                                         var NamesWithID = GenerateFilesList.FilesListWithID(NamesList, 'officer_id', id);
@@ -2206,7 +2207,7 @@
                                             DelMainRecPicRecUnlinkPic.DeleteIt(NamesList, id, false);
                                         });
 
-                                    }, 1000);
+                                    // }, 1000);
                                 }
                                 else
                                 {
@@ -2230,7 +2231,7 @@
                             message.failedMessageForInsert("<strong>Error!</strong> Insertion Failed !");
                         });
 
-                    }, 500);
+                    // }, 500);
                 }
                 else
                 {

@@ -414,7 +414,7 @@ a,a:focus, a:hover, a:active {
 .main-content2 {
     margin-top: 0px;
     margin-left: 0px;
-    min-height: 685px;
+        min-height: 640px;
     background: #f7f7f7 url("../img/body-bg.png");
 }
 

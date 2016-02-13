@@ -23,10 +23,16 @@ body {
     -moz-box-shadow: 0 0 10px #757575;
     -webkit-box-shadow:0 0 10px #757575 ;
 }
+
 a, a:hover {
     text-shadow: none !important;
     color: #FFF;
 }
+
+a .register, a:hover .register, {
+    color: #333333;
+}
+
 ul.faq-list li a:hover, ul.faq-list li a.active{
     background: #22C0CB;
 }
