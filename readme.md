@@ -48,6 +48,12 @@ make thing efficent the colony must be selected first and than the house. and by
 ### Waiting List:
 * BPS-01 To BPS-22 waiting divided into 10 different types of waiting lists.
 
+### prerequisite:
+* nodejs
+* Download/clone the code then:
+* at terminal/cmd type: "node Server.js"
+* Visit "localhost:3000" to view the app.
+
 ## Installtion
 1. Simply Download the Application (All the dependencies are included)
 2. Create Datebase by using the .sql file included
