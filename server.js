@@ -25,7 +25,7 @@ REST.prototype.connectMysql = function()
     {
         connectionLimit : 100,
         host     : process.env.host,
-        port     : process.env.port,
+        port     : process.env.dbPort,
         user     : process.env.user,
         password : process.env.password,
         database : process.env.database,
@@ -64,9 +64,9 @@ REST.prototype.configureExpress = function(connection)
 
 REST.prototype.startServer = function()
 {
-    app.listen(3000,function()
+    app.listen(process.env.port, function()
     {
-      console.log("All right ! I am alive at Port 3000.");
+      console.log("All right ! I am alive at Port " + process.env.port);
     });
 };
 
