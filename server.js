@@ -4,7 +4,6 @@
 //code taken and modified from github account : codeforgeek
 //twitter : @codeforgeek
 // Update: 01 Jan 2016
-
 var express     = require("express");
 var mysql       = require("mysql");
 var bodyParser  = require("body-parser");
@@ -12,7 +11,7 @@ var md5         = require('MD5');
 var rest        = require("./REST.js");
 var app         = express();
 var url = require('url');
-
+require('dotenv').config();
 function REST()
 {
     var self = this;
@@ -25,11 +24,11 @@ REST.prototype.connectMysql = function()
     var pool = mysql.createPool(
     {
         connectionLimit : 100,
-        host     : '127.0.0.1',
-        port     : '3306',
-        user     : 'root',
-        password : '',
-        database : 'estabdb',
+        host     : process.env.host,
+        port     : process.env.port,
+        user     : process.env.user,
+        password : process.env.password,
+        database : process.env.database,
         debug    :  false
     });
 
